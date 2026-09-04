@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "owner": "Krishna-V-Gowda",
+  "repository": "DATA301-ML-Studio",
+  "managed_by": "KVG_LAB_FINAL",
+  "public_intent": true,
+  "role": "flagship",
+  "identity": "inspectable scientific machine-learning laboratories",
+  "version": "2.2.1"
+}

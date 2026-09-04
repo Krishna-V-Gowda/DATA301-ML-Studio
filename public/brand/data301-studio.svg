@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120" role="img" aria-labelledby="title desc">
+  <title id="title">DATA301 Machine Learning Studio</title>
+  <desc id="desc">A geometric D301 mark beside the words Machine Learning Studio.</desc>
+  <rect width="420" height="120" rx="14" fill="#07111f"/>
+  <g transform="translate(18 18)" fill="none" stroke="#87a7ff" stroke-width="4">
+    <circle cx="42" cy="42" r="34"/><path d="M42 8v68M8 42h68" opacity=".45"/>
+    <path d="M21 57c12-26 30-31 44-17" stroke="#f4b75f"/>
+  </g>
+  <text x="104" y="52" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="31" font-weight="700" letter-spacing="2">DATA301</text>
+  <text x="104" y="81" fill="#aebfe0" font-family="system-ui, sans-serif" font-size="20">Machine Learning Studio</text>
+</svg>

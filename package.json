@@ -1,0 +1,49 @@
+{
+  "name": "data301-machine-learning-studio",
+  "version": "2.2.1",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "node --no-warnings --experimental-strip-types --test tests/*.test.mjs",
+    "test:algorithms": "node --no-warnings --experimental-strip-types --test tests/algorithms.test.mjs",
+    "test:content": "node --no-warnings --experimental-strip-types --test tests/content.test.mjs",
+    "setup:admin": "bash scripts/bootstrap-admin.sh",
+    "verify:supabase": "node --env-file=.env.local scripts/verify-supabase.mjs",
+    "verify:release": "npm run check:release && npm ci --ignore-scripts --no-audit --no-fund && npm run verify:source && npm run typecheck && npm run build",
+    "deploy:vercel": "bash scripts/deploy-vercel.sh",
+    "smoke:live": "node --no-warnings --experimental-strip-types scripts/smoke-live.mjs",
+    "verify:source": "npm test && node scripts/verify-public-release.mjs",
+    "check:release": "node scripts/check-release-prerequisites.mjs",
+    "finalize:release": "bash scripts/finalize-public-release.sh"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.7.0",
+    "@supabase/supabase-js": "2.57.4",
+    "katex": "0.16.22",
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.1.5"
+  },
+  "devDependencies": {
+    "@types/katex": "0.16.7",
+    "@types/node": "22.15.30",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "type": "module",
+  "license": "MIT",
+  "author": "Krishna V. Gowda",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Krishna-V-Gowda/DATA301-ML-Studio.git"
+  }
+}

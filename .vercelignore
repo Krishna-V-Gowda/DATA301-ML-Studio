@@ -1,0 +1,13 @@
+.env.local
+.env.*.local
+prototype/
+docs/screenshots/
+strategy/
+tests/
+*.zip
+*.sha256
+.DS_Store
+public/materials/
+
+LIVE_URL.txt
+.vercel/
