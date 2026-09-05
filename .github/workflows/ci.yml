@@ -1,23 +1,93 @@
-name: verification
+name: quality
 
 on:
   push:
+    branches: [main]
+    tags: ["v*"]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: data301-quality-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  source-tests:
-    runs-on: ubuntu-latest
+  quality:
+    name: deterministic source and production build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: 22.16.0
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
           cache: npm
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run verify:source
-      - run: npm run typecheck
-      - run: npm run build
-      - run: npm audit --omit=dev --audit-level=high
+      - name: Install the locked dependency graph
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify public source and numerical behavior
+        run: npm run verify:source
+      - name: Type check
+        run: npm run typecheck
+      - name: Build the production application
+        run: npm run build
+
+  dependency-audit:
+    name: dependency audit (network-aware)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install audited npm CLI
+        run: npm install --global npm@12.0.2 --ignore-scripts --no-audit --no-fund
+      - name: Install the locked dependency graph
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Audit production dependencies with bounded retry
+        shell: bash
+        run: |
+          set -uo pipefail
+          rm -f audit.json audit.stderr
+          for attempt in 1 2 3; do
+            : > audit.json
+            : > audit.stderr
+            npm audit --omit=dev --audit-level=high --json >audit.json 2>audit.stderr
+            rc=$?
+            if [ "$rc" -eq 0 ]; then
+              cat audit.json
+              echo "AUDIT_STATUS=PASS" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            combined="$(cat audit.json audit.stderr 2>/dev/null || true)"
+            if printf '%s' "$combined" | grep -Eqi \
+              'network timeout|EAI_AGAIN|ECONNRESET|ETIMEDOUT|ENETUNREACH|502 Bad Gateway|503 Service Unavailable|audit endpoint returned an error|registry\.npmjs\.org'; then
+              if [ "$attempt" -lt 3 ]; then
+                sleep $((attempt * 10))
+                continue
+              fi
+              echo "::warning::AUDIT_UNAVAILABLE after three attempts; deterministic quality remains independently verified."
+              {
+                echo "AUDIT_STATUS=AUDIT_UNAVAILABLE"
+                echo
+                echo "The npm advisory service was unavailable after three bounded attempts."
+                echo "This is not reported as a clean security audit."
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            cat audit.json audit.stderr >&2
+            echo "AUDIT_STATUS=FAIL" >> "$GITHUB_STEP_SUMMARY"
+            exit "$rc"
+          done
