@@ -99,6 +99,9 @@ export function LinearRegressionLab() {
           <input type="checkbox" checked={showResiduals} onChange={(event) => setShowResiduals(event.target.checked)} />
           <span>Show residuals</span>
         </label>
+        <button className="button button--quiet" type="button" onClick={() => setPoints((current) => [...current, { x: 5, y: 5 }])}>
+          Add point
+        </button>
         <button className="button button--quiet" type="button" onClick={() => setPoints(INITIAL_POINTS)}>
           Reset data
         </button>
@@ -180,6 +183,12 @@ export function LinearRegressionLab() {
                   if (!delta) return;
                   event.preventDefault();
                   nudgePoint(index, delta[0], delta[1]);
+                  return;
+                }}
+                onKeyUp={(event) => {
+                  if (event.key === 'Backspace' || event.key === 'Delete') {
+                    setPoints((current) => current.filter((_, pointIndex) => pointIndex !== index));
+                  }
                 }}
                 onDoubleClick={() => setPoints((current) => current.filter((_, pointIndex) => pointIndex !== index))}
               >

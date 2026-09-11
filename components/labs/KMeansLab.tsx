@@ -65,6 +65,7 @@ export function KMeansLab() {
         </div>
         <button type="button" className="button button--primary" onClick={step}>Run one iteration</button>
         <button type="button" className="button button--quiet" onClick={runToConvergence}>Converge</button>
+        <button type="button" className="button button--quiet" onClick={() => setPoints((current) => [...current, { x: 5, y: 5 }])}>Add observation</button>
         <button type="button" className="button button--quiet" onClick={() => reset()}>Reset</button>
       </div>
 

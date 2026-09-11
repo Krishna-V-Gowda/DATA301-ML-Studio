@@ -48,6 +48,9 @@ export function KnnLab() {
           <button type="button" className={addLabel === 'A' ? 'is-active class-a' : ''} onClick={() => setAddLabel('A')}>Add class A</button>
           <button type="button" className={addLabel === 'B' ? 'is-active class-b' : ''} onClick={() => setAddLabel('B')}>Add class B</button>
         </div>
+        <button className="button button--quiet" type="button" onClick={() => setPoints((current) => [...current, { x: 5, y: 5, label: addLabel }])}>
+          Add point
+        </button>
         <button className="button button--quiet" type="button" onClick={() => { setPoints(initialPoints); setQuery({ x: 5.1, y: 5.2 }); setK(5); }}>Reset</button>
       </div>
 
@@ -88,7 +91,18 @@ export function KnnLab() {
             {points.map((point, index) => {
               const selected = neighbourSet.has(`${point.x}-${point.y}-${point.label}`);
               return (
-                <g key={`${point.x}-${point.y}-${index}`} onDoubleClick={() => setPoints((current) => current.filter((_, i) => i !== index))}>
+                <g
+                  key={`${point.x}-${point.y}-${index}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Training point ${index + 1}: class ${point.label}, x ${point.x.toFixed(1)}, y ${point.y.toFixed(1)}`}
+                  onKeyUp={(event) => {
+                    if (event.key === 'Backspace' || event.key === 'Delete') {
+                      setPoints((current) => current.filter((_, i) => i !== index));
+                    }
+                  }}
+                  onDoubleClick={() => setPoints((current) => current.filter((_, i) => i !== index))}
+                >
                   {selected ? <circle cx={toX(point.x)} cy={toY(point.y)} r="12" className={`neighbor-halo class-${point.label.toLowerCase()}`} /> : null}
                   <circle cx={toX(point.x)} cy={toY(point.y)} r="6" className={`knn-point class-${point.label.toLowerCase()}`} />
                 </g>

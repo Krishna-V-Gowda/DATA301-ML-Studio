@@ -9,13 +9,13 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  if (!isSupabaseServerConfigured) {
-    return NextResponse.json({ error: 'Storage is not configured.' }, { status: 503 });
-  }
-
   const parsedId = MaterialId.safeParse((await params).id);
   if (!parsedId.success) {
     return NextResponse.json({ error: 'Material not found.' }, { status: 404 });
+  }
+
+  if (!isSupabaseServerConfigured) {
+    return NextResponse.json({ error: 'Storage is not configured.' }, { status: 503 });
   }
 
   const admin = createAdminClient();

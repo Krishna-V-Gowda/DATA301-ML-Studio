@@ -70,6 +70,7 @@ test('public/private and release boundaries are explicit in source', () => {
   const seedScript = source('scripts/seed-materials.mjs');
 
   assert.match(publicMaterialRoute, /\.eq\('visibility', 'public'\)/);
+  assert.match(publicMaterialRoute, /MaterialId\.safeParse[\s\S]*if \(!parsedId\.success\)[\s\S]*isSupabaseServerConfigured/);
   assert.match(publicMaterialRoute, /\.in\('status', \['published', 'scheduled'\]\)/);
   assert.match(publicMaterialRoute, /publish_at/);
   assert.match(privateMaterialRoute, /getStaffUser\(\)/);
