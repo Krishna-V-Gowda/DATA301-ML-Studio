@@ -82,6 +82,14 @@ fi
 printf '\nRunning the complete live smoke test against the preview…\n'
 node --env-file=.env.local --no-warnings --experimental-strip-types scripts/smoke-live.mjs "$PREVIEW_URL"
 
+printf '\nPreview passed. Production remains unchanged until the owner enters PROMOTE.\n'
+printf 'Type PROMOTE to continue: '
+read -r PROMOTION_CONFIRMATION
+if [[ "$PROMOTION_CONFIRMATION" != "PROMOTE" ]]; then
+  echo '✗ Promotion cancelled. The verified preview remains available and production was not changed.'
+  exit 1
+fi
+
 printf '\nPromoting the verified preview to production…\n'
 vercel_cli promote "$PREVIEW_URL" --yes --timeout=5m
 

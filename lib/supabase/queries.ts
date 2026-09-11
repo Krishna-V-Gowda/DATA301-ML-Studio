@@ -3,14 +3,14 @@ import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { createClient } from '@/lib/supabase/server';
 import type { Material, SessionStatus } from '@/lib/types';
 
-function courseMaterialPriority(material: Material) {
+export function courseMaterialPriority(material: Material) {
   if (material.title === 'DATA301 Course Overview') return 0;
   if (material.moduleSlug === 'supervised-learning') return 1;
   if (material.moduleSlug === 'introduction-and-data') return 2;
   return 3;
 }
 
-function orderCourseMaterials(items: Material[]) {
+export function orderCourseMaterials(items: Material[]) {
   return [...items].sort((a, b) => {
     const priorityDifference = courseMaterialPriority(a) - courseMaterialPriority(b);
     if (priorityDifference) return priorityDifference;
@@ -20,7 +20,7 @@ function orderCourseMaterials(items: Material[]) {
   });
 }
 
-function materialSeriesKey(material: Material) {
+export function materialSeriesKey(material: Material) {
   return [
     material.moduleSlug ?? 'course',
     material.sessionNumber ?? 'all',
@@ -28,7 +28,7 @@ function materialSeriesKey(material: Material) {
   ].join('::');
 }
 
-function latestPublishedMaterials(items: Material[]) {
+export function latestPublishedMaterials(items: Material[]) {
   const latest = new Map<string, Material>();
 
   for (const item of items) {

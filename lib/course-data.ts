@@ -276,7 +276,7 @@ export const modules: CourseModule[] = [
 export const materials: Material[] = [
   {
     id: 'public-course-guide',
-    title: 'DATA301 Platform Guide',
+    title: 'DATA301 Course Overview',
     description:
       'A short guide to the course overview, learning roadmap, laboratories, and protected material library.',
     kind: 'reference',
@@ -290,12 +290,28 @@ export const materials: Material[] = [
   },
   {
     id: 'public-lab-guide',
-    title: 'Interactive Laboratory Guide',
+    title: 'Module 1: Introduction to Machine Learning',
     description:
       'How to move from browser-based visual experimentation to Python and Jupyter practice.',
     kind: 'lab',
     href: '/resources/lab-guide.md',
     fileName: 'lab-guide.md',
+    format: 'Markdown',
+    sizeLabel: '< 1 KB',
+    status: 'published',
+    publishedAt: '2026-09-09',
+    version: 1,
+  },
+  {
+    id: 'public-module-2-guide',
+    title: 'Module 2: Supervised Learning Techniques and Evaluation Metrics',
+    description:
+      'A compact guide to supervised learning, regression, classification, evaluation metrics, and generalization before the complete presentation is released.',
+    kind: 'slides',
+    moduleSlug: 'supervised-learning',
+    sessionNumber: 5,
+    href: '/resources/module-2-guide.md',
+    fileName: 'module-2-guide.md',
     format: 'Markdown',
     sizeLabel: '< 1 KB',
     status: 'published',

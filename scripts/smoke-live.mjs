@@ -1,6 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import { labs } from '../lib/labs-data.ts';
 import { platform } from '../lib/platform.ts';
+import {
+  materialPrivacyPassed,
+  normalizeSmokeBase,
+  originPayloadPassed,
+  routeIdentityPassed,
+  searchPayloadPassed,
+} from './smoke-contract.mjs';
 
 const rawBase = process.argv[2]?.trim();
 if (!rawBase) {
@@ -8,7 +15,7 @@ if (!rawBase) {
   process.exit(1);
 }
 
-const base = (/^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase}`).replace(/\/$/, '');
+const base = normalizeSmokeBase(rawBase);
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const failures = [];
 
@@ -24,20 +31,20 @@ const topicPages = [
 ];
 
 const pages = [
-  { path: '/', marker: 'Machine Learning,' },
-  { path: '/course', marker: 'Know the course before you enter the models.' },
-  { path: '/learn', marker: 'Build the mental model in the right order.' },
-  { path: '/learn/module/introduction-and-data', marker: 'Introduction to Machine Learning' },
-  { path: '/learn/module/supervised-learning', marker: 'Supervised Learning Techniques' },
-  ...topicPages.map(([path, marker]) => ({ path, marker })),
-  { path: '/labs', marker: 'Change the model.' },
-  ...labs.map((lab) => ({ path: lab.href, marker: lab.title })),
-  { path: '/projects', marker: 'Turn the course into evidence' },
-  { path: '/resources', marker: 'Start with the course.' },
-  { path: '/search', marker: 'Find the concept behind the phrase.' },
-  { path: '/about', marker: 'A digital laboratory for learning Machine Learning.' },
-  { path: '/admin/login', marker: 'Instructor sign in' },
-  { path: '/admin/forgot-password', marker: 'Reset your password' },
+  { path: '/' },
+  { path: '/course' },
+  { path: '/learn' },
+  { path: '/learn/module/introduction-and-data' },
+  { path: '/learn/module/supervised-learning' },
+  ...topicPages.map(([path]) => ({ path })),
+  { path: '/labs' },
+  ...labs.map((lab) => ({ path: lab.href })),
+  { path: '/projects' },
+  { path: '/resources' },
+  { path: '/search' },
+  { path: '/about' },
+  { path: '/admin/login' },
+  { path: '/admin/forgot-password' },
 ];
 
 async function fetchWithRetry(url, options = {}) {
@@ -66,9 +73,9 @@ for (const page of pages) {
       headers: { 'User-Agent': 'DATA301-cosmic-v4-smoke-test' },
     });
     const html = await response.text();
-    const passed = response.ok && html.includes(page.marker);
+    const passed = routeIdentityPassed({ requestedPath: page.path, response, html });
     console.log(`${passed ? '✓' : '✗'} ${page.path} — HTTP ${response.status}`);
-    if (!passed) failures.push(`${page.path}: expected HTTP 2xx and marker “${page.marker}”`);
+    if (!passed) failures.push(`${page.path}: expected a successful response with a main landmark, route-consistent canonical URL, and heading`);
     if (page.path === '/') homeHtml = html;
     if (page.path === '/labs') labsHtml = html;
     if (page.path === '/resources') resourcesHtml = html;
@@ -91,10 +98,7 @@ try {
     headers: { 'User-Agent': 'DATA301-cosmic-v4-smoke-test' },
   });
   const payload = await response.json();
-  const passed = response.ok
-    && payload.count > 0
-    && payload.results?.some((item) => item.href === '/learn/module/supervised-learning')
-    && payload.results?.some((item) => item.href === '/topics/supervised-learning');
+  const passed = response.ok && searchPayloadPassed(payload);
   console.log(`${passed ? '✓' : '✗'} /api/search — Module 2 and its core concept indexed`);
   if (!passed) failures.push('/api/search: Module 2 results were incomplete');
 } catch {
@@ -106,11 +110,9 @@ for (const path of ['/robots.txt', '/sitemap.xml']) {
   try {
     const response = await fetchWithRetry(`${base}${path}`);
     const body = await response.text();
-    const hasBase = body.includes(base) || /https:\/\/[a-z0-9.-]+\.vercel\.app/i.test(body);
-    const hasLocalhost = /https?:\/\/localhost(?::\d+)?/i.test(body);
-    const passed = response.ok && hasBase && !hasLocalhost;
-    console.log(`${passed ? '✓' : '✗'} ${path} — production origin ${hasBase ? 'present' : 'missing'}`);
-    if (!passed) failures.push(`${path}: expected a secure production origin and no localhost URL`);
+    const passed = response.ok && originPayloadPassed(body, base);
+    console.log(`${passed ? '✓' : '✗'} ${path} — canonical origin ${passed ? 'present' : 'missing'}`);
+    if (!passed) failures.push(`${path}: expected the requested canonical origin and no localhost URL`);
   } catch {
     console.log(`✗ ${path} — request failed`);
     failures.push(`${path}: request failed`);
@@ -187,15 +189,14 @@ if (!url || !serverKey) {
       console.log('✗ Detailed Course Plan — staff-only record missing');
       failures.push('Detailed Course Plan is not marked staff-only');
     } else {
-      const leakedInLibrary = resourcesHtml.includes(`/api/materials/${coursePlan.id}`);
-      let blockedPublicly = false;
+      let publicRouteStatus = 0;
       try {
         const response = await fetchWithRetry(`${base}/api/materials/${coursePlan.id}`, { redirect: 'manual' });
-        blockedPublicly = response.status === 404;
+        publicRouteStatus = response.status;
       } catch {
-        blockedPublicly = false;
+        publicRouteStatus = 0;
       }
-      const passed = !leakedInLibrary && blockedPublicly;
+      const passed = materialPrivacyPassed({ publicHtml: resourcesHtml, publicRouteStatus, coursePlanId: coursePlan.id });
       console.log(`${passed ? '✓' : '✗'} Detailed Course Plan privacy — absent from public library and route blocked`);
       if (!passed) failures.push('Detailed Course Plan is exposed through the public material route');
     }

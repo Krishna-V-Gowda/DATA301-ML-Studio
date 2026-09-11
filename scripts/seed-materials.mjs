@@ -98,6 +98,22 @@ for (const asset of assets) {
   for await (const chunk of createReadStream(asset.path)) chunks.push(chunk);
   const body = Buffer.concat(chunks);
 
+  const { data: pathOwner, error: pathOwnerError } = await supabase
+    .from('materials')
+    .select('id,title')
+    .eq('storage_path', storagePath)
+    .maybeSingle();
+  if (pathOwnerError) throw new Error(`Material storage-path lookup failed for ${fileName}: ${pathOwnerError.message}`);
+  if (pathOwner && pathOwner.title.trim().toLowerCase() !== asset.title.trim().toLowerCase()) {
+    throw new Error(`Material storage path ${storagePath} is already owned by ${pathOwner.title}; refusing to overwrite another material.`);
+  }
+
+  const { data: existingStoredFiles, error: storageLookupError } = await supabase.storage
+    .from('course-materials')
+    .list('data301/course', { limit: 100, search: fileName });
+  if (storageLookupError) throw new Error(`Material storage lookup failed for ${fileName}: ${storageLookupError.message}`);
+  const storageObjectExisted = existingStoredFiles?.some((file) => file.name === fileName) ?? false;
+
   const { error: uploadError } = await supabase.storage.from('course-materials').upload(storagePath, body, {
     contentType: asset.mime,
     cacheControl: '3600',
@@ -105,7 +121,8 @@ for (const asset of assets) {
   });
   if (uploadError) throw new Error(`Upload failed for ${fileName}: ${uploadError.message}`);
 
-  const payload = {
+  try {
+    const payload = {
     course_id: course.id,
     title: asset.title,
     description: asset.description,
@@ -126,11 +143,11 @@ for (const asset of assets) {
     created_by: createdBy,
   };
 
-  // Reconcile against the same logical identity enforced by
-  // materials_series_version_unique, not merely storage_path. Older
-  // production seeds may have used a different storage path while keeping
-  // the same course/kind/title/module/session/version identity.
-  let identityQuery = supabase
+    // Reconcile against the same logical identity enforced by
+    // materials_series_version_unique, not merely storage_path. Older
+    // production seeds may have used a different storage path while keeping
+    // the same course/kind/title/module/session/version identity.
+    let identityQuery = supabase
     .from('materials')
     .select('id,storage_path')
     .eq('course_id', course.id)
@@ -138,99 +155,108 @@ for (const asset of assets) {
     .eq('version', 1)
     .eq('title', asset.title);
 
-  identityQuery = asset.moduleSlug === null
+    identityQuery = asset.moduleSlug === null
     ? identityQuery.is('module_slug', null)
     : identityQuery.eq('module_slug', asset.moduleSlug);
-  identityQuery = asset.sessionNumber === null
+    identityQuery = asset.sessionNumber === null
     ? identityQuery.is('session_number', null)
     : identityQuery.eq('session_number', asset.sessionNumber);
 
-  const { data: matches, error: findError } = await identityQuery.limit(2);
-  if (findError) throw new Error(`Material lookup failed for ${fileName}: ${findError.message}`);
-  if ((matches?.length ?? 0) > 1) {
-    throw new Error(`Material identity is ambiguous for ${fileName}; expected at most one matching record.`);
-  }
+    const { data: matches, error: findError } = await identityQuery.limit(2);
+    if (findError) throw new Error(`Material lookup failed for ${fileName}: ${findError.message}`);
+    if ((matches?.length ?? 0) > 1) {
+      throw new Error(`Material identity is ambiguous for ${fileName}; expected at most one matching record.`);
+    }
 
-  let existing = matches?.[0] ?? null;
-  if (!existing) {
+    let existing = matches?.[0] ?? null;
+    if (!existing) {
     // Be tolerant of a historical title-casing difference. The database's
     // unique index uses lower(title), so this secondary lookup mirrors it.
-    let caseInsensitiveQuery = supabase
+      let caseInsensitiveQuery = supabase
       .from('materials')
       .select('id,storage_path,title')
       .eq('course_id', course.id)
       .eq('kind', asset.kind)
       .eq('version', 1)
       .ilike('title', asset.title);
-    caseInsensitiveQuery = asset.moduleSlug === null
+      caseInsensitiveQuery = asset.moduleSlug === null
       ? caseInsensitiveQuery.is('module_slug', null)
       : caseInsensitiveQuery.eq('module_slug', asset.moduleSlug);
-    caseInsensitiveQuery = asset.sessionNumber === null
+      caseInsensitiveQuery = asset.sessionNumber === null
       ? caseInsensitiveQuery.is('session_number', null)
       : caseInsensitiveQuery.eq('session_number', asset.sessionNumber);
-    const { data: candidates, error: caseInsensitiveError } = await caseInsensitiveQuery.limit(10);
-    if (caseInsensitiveError) {
-      throw new Error(`Material lookup failed for ${fileName}: ${caseInsensitiveError.message}`);
+      const { data: candidates, error: caseInsensitiveError } = await caseInsensitiveQuery.limit(10);
+      if (caseInsensitiveError) {
+        throw new Error(`Material lookup failed for ${fileName}: ${caseInsensitiveError.message}`);
+      }
+      existing = candidates?.find((candidate) =>
+        candidate.title.trim().toLowerCase() === asset.title.trim().toLowerCase()
+      ) ?? null;
     }
-    existing = candidates?.find((candidate) =>
-      candidate.title.trim().toLowerCase() === asset.title.trim().toLowerCase()
-    ) ?? null;
-  }
 
-  let materialError;
-  if (existing) {
-    if (existing.storage_path !== storagePath) {
-      const { data: pathOwner, error: pathOwnerError } = await supabase
+    let materialError;
+    if (existing) {
+      if (existing.storage_path !== storagePath) {
+        const { data: existingPathOwner, error: existingPathOwnerError } = await supabase
+          .from('materials')
+          .select('id,title')
+          .eq('storage_path', storagePath)
+          .maybeSingle();
+        if (existingPathOwnerError) {
+          throw new Error(`Material storage-path lookup failed for ${fileName}: ${existingPathOwnerError.message}`);
+        }
+        if (existingPathOwner && existingPathOwner.id !== existing.id) {
+          throw new Error(`Material storage path ${storagePath} is already owned by ${existingPathOwner.title}; refusing to overwrite another material.`);
+        }
+      }
+
+      ({ error: materialError } = await supabase
         .from('materials')
-        .select('id,title')
-        .eq('storage_path', storagePath)
-        .maybeSingle();
-      if (pathOwnerError) {
-        throw new Error(`Material storage-path lookup failed for ${fileName}: ${pathOwnerError.message}`);
-      }
-      if (pathOwner && pathOwner.id !== existing.id) {
-        throw new Error(`Material storage path ${storagePath} is already owned by ${pathOwner.title}; refusing to overwrite another material.`);
-      }
-    }
-
-    ({ error: materialError } = await supabase
-      .from('materials')
-      .update(payload)
-      .eq('id', existing.id));
-  } else {
-    ({ error: materialError } = await supabase
-      .from('materials')
-      .insert(payload));
+        .update(payload)
+        .eq('id', existing.id));
+    } else {
+      ({ error: materialError } = await supabase
+        .from('materials')
+        .insert(payload));
 
     // If another writer created the logically identical record between the
     // lookup and insert, reconcile it instead of failing the whole release.
-    if (materialError?.code === '23505') {
-      let retryQuery = supabase
+      if (materialError?.code === '23505') {
+        let retryQuery = supabase
         .from('materials')
         .select('id')
         .eq('course_id', course.id)
         .eq('kind', asset.kind)
         .eq('version', 1)
         .eq('title', asset.title);
-      retryQuery = asset.moduleSlug === null
+        retryQuery = asset.moduleSlug === null
         ? retryQuery.is('module_slug', null)
         : retryQuery.eq('module_slug', asset.moduleSlug);
-      retryQuery = asset.sessionNumber === null
+        retryQuery = asset.sessionNumber === null
         ? retryQuery.is('session_number', null)
         : retryQuery.eq('session_number', asset.sessionNumber);
-      const { data: retryMatch, error: retryLookupError } = await retryQuery.maybeSingle();
-      if (retryLookupError || !retryMatch) {
-        throw new Error(`Material record failed for ${fileName}: ${materialError.message}`);
+        const { data: retryMatch, error: retryLookupError } = await retryQuery.maybeSingle();
+        if (retryLookupError || !retryMatch) {
+          throw new Error(`Material record failed for ${fileName}: ${materialError.message}`);
+        }
+        ({ error: materialError } = await supabase
+          .from('materials')
+          .update(payload)
+          .eq('id', retryMatch.id));
       }
-      ({ error: materialError } = await supabase
-        .from('materials')
-        .update(payload)
-        .eq('id', retryMatch.id));
     }
-  }
 
-  if (materialError) throw new Error(`Material record failed for ${fileName}: ${materialError.message}`);
-  console.log(`✓ ${asset.title}${asset.visibility === 'staff' ? ' · instructor only' : ''}${existing ? ' · reconciled' : ''}`);
+    if (materialError) throw new Error(`Material record failed for ${fileName}: ${materialError.message}`);
+    console.log(`✓ ${asset.title}${asset.visibility === 'staff' ? ' · instructor only' : ''}${existing ? ' · reconciled' : ''}`);
+  } catch (error) {
+    if (!storageObjectExisted) {
+      const { error: cleanupError } = await supabase.storage.from('course-materials').remove([storagePath]);
+      if (cleanupError) {
+        console.error(`Material metadata failed for ${fileName}, and orphan cleanup also failed: ${cleanupError.message}`);
+      }
+    }
+    throw error;
+  }
 }
 
 for (const session of [
