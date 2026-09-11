@@ -1,0 +1,39 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next
+/.next/
+/out/
+
+# production
+/build
+
+# local env files
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# OS/editor
+.DS_Store
+*.log
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+LIVE_URL.txt
+
+# private course assets and instructor handoff
+/private_seed/
+PRIVATE_*_HANDOFF.txt
+PROFESSOR_HANDOFF_EMAIL.md
+COSMIC_RELEASE.log
+COSMIC_RELEASE_RESULT.md
+
+# Supabase CLI local link/config state
+/supabase/.temp/
+/supabase/config.toml

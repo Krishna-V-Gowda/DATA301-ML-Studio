@@ -1,0 +1,46 @@
+{
+  "name": "data301-machine-learning-studio",
+  "version": "4.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "node --no-warnings --experimental-strip-types --test tests/*.test.mjs",
+    "test:algorithms": "node --no-warnings --experimental-strip-types --test tests/algorithms.test.mjs",
+    "test:content": "node --no-warnings --experimental-strip-types --test tests/content.test.mjs",
+    "verify:source": "node --no-warnings --experimental-strip-types scripts/verify-source.mjs",
+    "setup:admin": "bash scripts/bootstrap-admin.sh",
+    "setup:instructor": "node --env-file=.env.local scripts/provision-instructor.mjs",
+    "setup:materials": "node --env-file=.env.local scripts/seed-materials.mjs",
+    "verify:supabase": "node --env-file=.env.local scripts/verify-supabase.mjs",
+    "verify:release": "npm run verify:source && npm test && npm run typecheck && npm run build",
+    "deploy:vercel": "bash scripts/deploy-vercel.sh",
+    "prepare:go-live": "bash scripts/prepare-go-live.sh",
+    "smoke:live": "node --env-file=.env.local --no-warnings --experimental-strip-types scripts/smoke-live.mjs",
+    "smoke:cosmic": "node --env-file=.env.local --no-warnings --experimental-strip-types scripts/smoke-live.mjs",
+    "migrate:supabase": "bash scripts/apply-supabase-migrations.sh"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.4",
+    "katex": "^0.16.22",
+    "next": "^16.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "type": "module"
+}

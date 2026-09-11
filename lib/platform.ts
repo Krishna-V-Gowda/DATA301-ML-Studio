@@ -1,0 +1,60 @@
+export const platform = {
+  name: 'DATA301 Machine Learning Studio',
+  shortName: 'ML Studio',
+  university: 'Vidyashilp University',
+  universityUrl: 'https://vidyashilp.edu.in/',
+  campusUrl: 'https://vidyashilp.edu.in/vu-campus/',
+  courseCode: 'DATA301',
+  academicYear: '2026',
+  instructor: {
+    name: 'Dr. Shabbeer Basha',
+    email: 'shabbeer.basha@vidyashilp.edu.in',
+    github: 'https://github.com/shabbeersh/ML_lab',
+    portfolio: 'https://sites.google.com/site/shabbeerbashash',
+  },
+  developer: {
+    name: 'Krishna V Gowda',
+    role: 'Academic Assistant - DATA301',
+    github: 'https://github.com/Krishna-V-Gowda',
+    repository: 'https://github.com/Krishna-V-Gowda/DATA301-ML-Studio',
+  },
+} as const;
+
+export const module2Chapters = [
+  {
+    index: '01',
+    title: 'Supervised learning',
+    description: 'Understand labelled examples, features, targets, and the distinction between regression and classification.',
+    slideRange: 'Slides 4-5',
+    topicHref: '/topics/supervised-learning',
+    labHref: '/labs/logistic-regression',
+    accent: 'cobalt',
+  },
+  {
+    index: '02',
+    title: 'Regression',
+    description: 'Move from linear models and cost functions to gradient descent, multiple regression, and error metrics.',
+    slideRange: 'Slides 6-38',
+    topicHref: '/topics/linear-regression',
+    labHref: '/labs/linear-regression',
+    accent: 'violet',
+  },
+  {
+    index: '03',
+    title: 'Classification',
+    description: 'Study logistic regression, KNN, decision trees, class imbalance, and the geometry of decision boundaries.',
+    slideRange: 'Slides 39-106',
+    topicHref: '/topics/logistic-regression',
+    labHref: '/labs/decision-tree',
+    accent: 'teal',
+  },
+  {
+    index: '04',
+    title: 'Generalization',
+    description: 'Connect model complexity to underfitting, overfitting, bias, variance, and performance on unseen data.',
+    slideRange: 'Slides 107-110',
+    topicHref: '/topics/bias-variance',
+    labHref: '/labs/overfitting',
+    accent: 'amber',
+  },
+] as const;
