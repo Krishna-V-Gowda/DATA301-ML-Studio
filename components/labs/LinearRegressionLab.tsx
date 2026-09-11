@@ -68,6 +68,12 @@ export function LinearRegressionLab() {
     );
   }
 
+  function nudgePoint(index: number, deltaX: number, deltaY: number) {
+    setPoints((current) => current.map((point, pointIndex) => pointIndex === index
+      ? { x: Math.min(10, Math.max(0, point.x + deltaX)), y: Math.min(10, Math.max(0, point.y + deltaY)) }
+      : point));
+  }
+
   function addPoint(event: React.PointerEvent<SVGSVGElement>) {
     if (event.target !== event.currentTarget) return;
     const local = localPoint(event.clientX, event.clientY);
@@ -158,11 +164,22 @@ export function LinearRegressionLab() {
                 key={`point-${index}`}
                 className="draggable-point"
                 role="button"
+                tabIndex={0}
                 aria-label={`Data point ${index + 1}: x ${point.x.toFixed(1)}, y ${point.y.toFixed(1)}`}
                 onPointerDown={(event) => {
                   event.stopPropagation();
                   event.currentTarget.setPointerCapture(event.pointerId);
                   setDragging(index);
+                }}
+                onKeyDown={(event) => {
+                  const step = event.shiftKey ? 0.5 : 0.1;
+                  const deltas: Record<string, [number, number]> = {
+                    ArrowUp: [0, step], ArrowDown: [0, -step], ArrowLeft: [-step, 0], ArrowRight: [step, 0],
+                  };
+                  const delta = deltas[event.key];
+                  if (!delta) return;
+                  event.preventDefault();
+                  nudgePoint(index, delta[0], delta[1]);
                 }}
                 onDoubleClick={() => setPoints((current) => current.filter((_, pointIndex) => pointIndex !== index))}
               >

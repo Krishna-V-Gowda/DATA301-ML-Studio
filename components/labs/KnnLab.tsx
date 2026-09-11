@@ -34,6 +34,13 @@ export function KnnLab() {
     return { x: ((clientX - rect.left) / rect.width) * WIDTH, y: ((clientY - rect.top) / rect.height) * HEIGHT };
   }
 
+  function nudgeQuery(deltaX: number, deltaY: number) {
+    setQuery((current) => ({
+      x: Math.max(0, Math.min(10, current.x + deltaX)),
+      y: Math.max(0, Math.min(10, current.y + deltaY)),
+    }));
+  }
+
   return (
     <div className="lab-shell">
       <div className="lab-toolbar">
@@ -89,7 +96,21 @@ export function KnnLab() {
             })}
             <g
               className={`query-point prediction-${result.label.toLowerCase()}`}
+              role="slider"
+              tabIndex={0}
+              aria-label={`Query point. Current x ${query.x.toFixed(1)}, y ${query.y.toFixed(1)}. Predicted class ${result.label}.`}
+              aria-valuetext={`x ${query.x.toFixed(1)}, y ${query.y.toFixed(1)}, class ${result.label}`}
               onPointerDown={(event) => { event.stopPropagation(); setDraggingQuery(true); event.currentTarget.setPointerCapture(event.pointerId); }}
+              onKeyDown={(event) => {
+                const step = event.shiftKey ? 0.5 : 0.1;
+                const deltas: Record<string, [number, number]> = {
+                  ArrowUp: [0, step], ArrowDown: [0, -step], ArrowLeft: [-step, 0], ArrowRight: [step, 0],
+                };
+                const delta = deltas[event.key];
+                if (!delta) return;
+                event.preventDefault();
+                nudgeQuery(delta[0], delta[1]);
+              }}
             >
               <circle cx={toX(query.x)} cy={toY(query.y)} r="15" className="query-ring" />
               <circle cx={toX(query.x)} cy={toY(query.y)} r="5" className="query-core" />
