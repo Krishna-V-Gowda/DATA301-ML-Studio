@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="docs/assets/data301-cover.svg" alt="DATA301 Machine Learning Studio" width="100%">
+</p>
+
+
 # DATA301 Machine Learning Studio
 
 **An interactive, production-grade learning environment for DATA301 — Machine Learning at Vidyashilp University.**
