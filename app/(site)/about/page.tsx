@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="v51-route v51-route--about">
       <section className="page-hero page-hero--course page-hero--about-cosmic">
         <div className="shell page-hero__grid">
           <div><span className="eyebrow">About the platform</span><h1>A digital laboratory for learning Machine Learning.</h1><p>DATA301 ML Studio connects the course sequence, interactive model behaviour, formal explanations, implementation pathways, and instructor-managed resources in one coherent environment.</p></div>
@@ -26,6 +26,53 @@ export default function AboutPage() {
           <article><strong>Manipulate</strong><p>Change parameters and observe the consequence immediately.</p></article>
           <article><strong>Explain</strong><p>Translate the visual outcome into a mathematical and practical reason.</p></article>
           <article><strong>Implement</strong><p>Continue into Python/Jupyter course work and project practice.</p></article>
+        </div>
+      </section>
+
+      <section className="v51-campus-story" aria-labelledby="v51-campus-title">
+        <div className="shell">
+          <div className="v51-campus-story__head">
+            <div>
+              <span className="eyebrow">Vidyashilp University</span>
+              <h2 id="v51-campus-title">
+                Built for learning that moves between ideas and practice.
+              </h2>
+            </div>
+            <p>
+              DATA301 belongs to a wider academic environment where conceptual
+              foundations, experimentation, implementation, and independent
+              judgement reinforce one another.
+            </p>
+          </div>
+
+          <div className="v51-campus-mosaic">
+            <figure className="v51-campus-mosaic__hero">
+              <Image
+                src="/campus/vu-campus-hero.webp"
+                alt="Vidyashilp University campus"
+                fill
+                sizes="(max-width: 900px) 100vw, 62vw"
+              />
+            </figure>
+
+            <figure className="v51-campus-mosaic__detail">
+              <Image
+                src="/campus/vu-campus-detail.webp"
+                alt="Architectural detail at Vidyashilp University"
+                fill
+                sizes="(max-width: 900px) 100vw, 32vw"
+              />
+            </figure>
+
+            <figure className="v51-campus-mosaic__atmosphere">
+              <Image
+                src="/campus/vu-campus-atmosphere.webp"
+                alt="Academic environment at Vidyashilp University"
+                fill
+                sizes="(max-width: 900px) 100vw, 32vw"
+              />
+            </figure>
+          </div>
         </div>
       </section>
 

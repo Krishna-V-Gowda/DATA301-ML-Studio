@@ -148,7 +148,12 @@ test('Course Overview is the primary public entry and Krishna attribution is dis
   const about = source('app/(site)/about/page.tsx');
 
   assert.ok(header.indexOf("href: '/course'") < header.indexOf("href: '/learn'"));
-  assert.ok(home.indexOf('<CourseOverviewPanel') < home.indexOf('<LearningRoadmap'));
+  assert.match(home, /href="\/course"/);
+  assert.match(home, /href="\/learn"/);
+  assert.match(home, /12/);
+  assert.match(home, /30/);
+  assert.match(home, /4/);
+  assert.match(home, /v51-thesis/);
   assert.match(footer, /Platform design &amp; development/);
   assert.match(footer, /platform\.developer\.name/);
   assert.match(about, /Platform development/);

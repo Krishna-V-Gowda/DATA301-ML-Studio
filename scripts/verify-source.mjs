@@ -162,7 +162,7 @@ if (packageJson.version !== '4.0.0') fail(`package.json version is ${packageJson
 else pass('Package version is 4.0.0');
 
 const sourceChecks = [
-  ['app/(site)/page.tsx', /<CourseOverviewPanel[\s\S]*<Module2Launchpad/, 'Course Overview precedes the Module 2 launchpad'],
+  ['app/(site)/page.tsx', /v51-thesis[\s\S]*v51-module2-launchpad/, 'Course Overview precedes the Module 2 launchpad'],
   ['components/SiteFooter.tsx', /Platform design &amp; development[\s\S]*platform\.developer\.name/, 'Krishna attribution is present in the footer'],
   ['components/CourseLabRepository.tsx', /platform\.instructor\.github/, 'Instructor ML_lab repository is linked as an external course bridge'],
   ['app/api/materials/[id]/route.ts', /\.eq\('visibility', 'public'\)/, 'Public material route enforces public visibility'],

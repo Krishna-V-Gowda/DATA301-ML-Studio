@@ -18,7 +18,7 @@ const groups = [
 
 export default function LabsPage() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="v51-route v51-route--labs">
       <section className="labs-hero-cosmic">
         <div className="labs-hero-cosmic__field" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
         <div className="shell labs-hero-cosmic__grid">

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function CoursePage() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="v51-route v51-route--course">
       <section className="course-hero-cosmic">
         <Image src="/campus/vu-campus-atmosphere.webp" alt="" fill priority sizes="100vw" />
         <div className="course-hero-cosmic__veil" />
@@ -74,9 +74,16 @@ export default function CoursePage() {
             <div className="instructor-course-panel__themes"><span>Deep model compression</span><span>Active learning</span><span>Domain adaptation</span><span>Continual learning</span></div>
           </div>
           <div className="instructor-course-panel__links">
-            <Link href={platform.instructor.portfolio} target="_blank" rel="noreferrer">Instructor profile <Icon name="external" size={16} /></Link>
-            <Link href={platform.instructor.github} target="_blank" rel="noreferrer">Course ML Lab repository <Icon name="github" size={17} /></Link>
-          </div>
+              <Link href="/instructor">
+                Meet the course instructor <Icon name="arrow" size={16} />
+              </Link>
+              <Link href={platform.instructor.portfolio} target="_blank" rel="noreferrer">
+                Academic profile <Icon name="external" size={16} />
+              </Link>
+              <Link href={platform.instructor.github} target="_blank" rel="noreferrer">
+                Course ML Lab repository <Icon name="github" size={17} />
+              </Link>
+            </div>
         </div>
       </section>
 

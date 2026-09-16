@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function LearnPage() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="v51-route v51-route--learn">
       <section className="page-hero page-hero--roadmap">
         <div className="shell page-hero__grid">
           <div>
@@ -67,7 +67,11 @@ export default function LearnPage() {
                         ))}
                       </div>
                     ) : (
-                      <div className="empty-state-inline">Rich topic lessons will be published as the class progresses.</div>
+                      <div className="empty-state-inline v51-upcoming">
+                          <span>Upcoming with course progression</span>
+                          <strong>Module lessons are being released in teaching order.</strong>
+                          <p>Use the module overview now; rich concept lessons will appear here as the class reaches this stage.</p>
+                        </div>
                     )}
                   </div>
                 </section>

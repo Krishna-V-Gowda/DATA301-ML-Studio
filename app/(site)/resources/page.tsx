@@ -16,7 +16,7 @@ export default async function ResourcesPage() {
   const hasModule2 = materials.some((material) => material.moduleSlug === 'supervised-learning');
 
   return (
-    <main id="main-content">
+    <main id="main-content" className="v51-route v51-route--resources">
       <section className="resource-hero-cosmic">
         <Image src="/campus/vu-campus-courtyard.webp" alt="" fill priority sizes="100vw" />
         <div className="resource-hero-cosmic__veil" />

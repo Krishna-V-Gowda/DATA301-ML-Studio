@@ -4,60 +4,90 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { Icon } from '@/components/ui/Icon';
 
 const nav = [
-  { href: '/course', label: 'Course overview' },
+  { href: '/course', label: 'Course' },
   { href: '/learn', label: 'Learn' },
   { href: '/labs', label: 'Labs' },
   { href: '/projects', label: 'Projects' },
   { href: '/resources', label: 'Resources' },
+  { href: '/instructor', label: 'Instructor' },
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 14);
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <header className={scrolled ? 'site-header site-header--scrolled' : 'site-header'}>
+    <header className="v51-header">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <div className="site-header__inner shell">
-        <Link className="brand brand--cosmic" href="/" aria-label="DATA301 Machine Learning home">
-          <Image src="/brand/vidyashilp-university.png" alt="Vidyashilp University" width={146} height={53} priority />
-          <span className="brand__divider" aria-hidden="true" />
-          <span className="brand__course"><strong>DATA301</strong><span>Machine Learning Studio</span></span>
+
+      <div className="shell v51-header__inner">
+        <Link className="v51-brand" href="/" aria-label="DATA301 Machine Learning home">
+          <Image
+            src="/brand/vidyashilp-university.png"
+            alt="Vidyashilp University"
+            width={140}
+            height={51}
+            priority
+          />
+          <span className="v51-brand__rule" aria-hidden="true" />
+          <span className="v51-brand__course">
+            <strong>DATA301</strong>
+            <small>Machine Learning Studio</small>
+          </span>
         </Link>
 
-        <nav className="desktop-nav" aria-label="Primary navigation">
+        <nav className="v51-nav" aria-label="Primary navigation">
           {nav.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return <Link className={active ? 'nav-link is-active' : 'nav-link'} href={item.href} key={item.href}>{item.label}</Link>;
+            return (
+              <Link
+                className={active ? 'v51-nav__link is-active' : 'v51-nav__link'}
+                href={item.href}
+                key={item.href}
+              >
+                {item.label}
+              </Link>
+            );
           })}
         </nav>
 
-        <div className="header-actions">
-          <Link className="icon-button" href="/search" aria-label="Search course content" title="Search"><Icon name="search" /></Link>
-          <ThemeToggle />
-          <button className="icon-button mobile-menu-button" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen((value) => !value)}><Icon name={open ? 'x' : 'menu'} /></button>
+        <div className="v51-header__actions">
+          <Link className="v51-icon-button" href="/search" aria-label="Search course content">
+            <Icon name="search" size={19} />
+          </Link>
+
+          <button
+            className="v51-menu"
+            type="button"
+            aria-label={open ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <Icon name={open ? 'x' : 'menu'} size={20} />
+          </button>
         </div>
       </div>
 
       {open ? (
-        <nav className="mobile-nav" aria-label="Mobile navigation">
-          <div className="shell mobile-nav__inner">
-            {nav.map((item) => <Link href={item.href} key={item.href}>{item.label}<Icon name="chevron" size={18} /></Link>)}
-            <Link href="/about">About & credits<Icon name="chevron" size={18} /></Link>
-            <Link href="/admin/login">Instructor login<Icon name="lock" size={18} /></Link>
+        <nav className="v51-mobile-nav" aria-label="Mobile navigation">
+          <div className="shell">
+            {nav.map((item) => (
+              <Link href={item.href} key={item.href}>
+                <span>{item.label}</span>
+                <Icon name="arrow" size={17} />
+              </Link>
+            ))}
+            <Link href="/admin/login">
+              <span>Instructor portal</span>
+              <Icon name="lock" size={16} />
+            </Link>
           </div>
         </nav>
       ) : null}
