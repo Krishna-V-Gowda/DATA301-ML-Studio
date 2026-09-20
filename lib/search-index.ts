@@ -1,6 +1,7 @@
 import { modules } from './course-data.ts';
 import { topics } from './topic-data.ts';
 import { labs } from './labs-data.ts';
+import { projectBriefs } from './project-data.ts';
 import type { Material } from './types.ts';
 
 export type SearchDocument = {
@@ -8,7 +9,7 @@ export type SearchDocument = {
   title: string;
   description: string;
   href: string;
-  type: 'Topic' | 'Module' | 'Material' | 'Lab';
+  type: 'Topic' | 'Module' | 'Lab' | 'Material' | 'Project';
   keywords: string[];
 };
 
@@ -39,6 +40,14 @@ const coreDocuments: SearchDocument[] = [
     keywords: module.topics,
   })),
   ...labDocuments,
+  ...projectBriefs.map((project) => ({
+    id: `project-${project.slug}`,
+    title: project.title,
+    description: project.objective,
+    href: `/projects/${project.slug}`,
+    type: 'Project' as const,
+    keywords: [project.level, project.concepts, project.output],
+  })),
 ];
 
 export function buildSearchDocuments(materials: Material[] = []): SearchDocument[] {

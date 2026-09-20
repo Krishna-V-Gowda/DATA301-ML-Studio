@@ -290,9 +290,9 @@ export const materials: Material[] = [
   },
   {
     id: 'public-lab-guide',
-    title: 'Module 1: Introduction to Machine Learning',
+    title: 'Module 1 — Implementation Guide',
     description:
-      'How to move from browser-based visual experimentation to Python and Jupyter practice.',
+      'How to move from browser-based visual experimentation to Python and Jupyter practice after working through the module.',
     kind: 'lab',
     href: '/resources/lab-guide.md',
     fileName: 'lab-guide.md',

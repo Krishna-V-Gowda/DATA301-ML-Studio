@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import type { SearchDocument } from '@/lib/search-index';
 
-const filters = ['All', 'Topic', 'Module', 'Lab', 'Material'] as const;
+const filters = ['All', 'Topic', 'Module', 'Lab', 'Project', 'Material'] as const;
 
 function normalize(value: string) {
   return value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s-]/g, ' ');

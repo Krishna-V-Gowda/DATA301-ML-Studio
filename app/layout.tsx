@@ -3,6 +3,7 @@ import 'katex/dist/katex.min.css';
 import './globals.css';
 import './cosmic.css';
 import './v5.css';
+import './v6.css';
 import { RecoveryRedirect } from '@/components/admin/RecoveryRedirect';
 import { getSiteUrl } from '@/lib/site-url';
 

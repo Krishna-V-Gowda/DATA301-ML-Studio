@@ -4,97 +4,15 @@ import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { platform } from '@/lib/platform';
 
-export const metadata: Metadata = {
-  title: 'About the Platform',
-  description: 'About the DATA301 learning platform, its academic purpose, and development credits.',
-};
+export const metadata: Metadata = { title: 'About the Platform', description: 'About DATA301 Machine Learning Studio, its academic setting, purpose, and development.' };
 
 export default function AboutPage() {
-  return (
-    <main id="main-content" className="v51-route v51-route--about">
-      <section className="page-hero page-hero--course page-hero--about-cosmic">
-        <div className="shell page-hero__grid">
-          <div><span className="eyebrow">About the platform</span><h1>A digital laboratory for learning Machine Learning.</h1><p>DATA301 ML Studio connects the course sequence, interactive model behaviour, formal explanations, implementation pathways, and instructor-managed resources in one coherent environment.</p></div>
-          <figure className="about-campus-frame"><Image src="/campus/vu-campus-courtyard.webp" alt="Vidyashilp University campus" fill sizes="(max-width: 900px) 90vw, 520px" /></figure>
-        </div>
-      </section>
-
-      <section className="section shell about-platform-grid">
-        <article><span className="eyebrow">Why it exists</span><h2>Static notes describe a model. Interaction reveals its behaviour.</h2><p>The platform is designed so that a student can first understand the intuition, manipulate the model, connect the result to mathematics, and then continue into implementation and evaluation.</p></article>
-        <div className="about-principle-stack">
-          <article><strong>See</strong><p>Visualize geometry, boundaries, residuals, margins, clusters, and metrics.</p></article>
-          <article><strong>Manipulate</strong><p>Change parameters and observe the consequence immediately.</p></article>
-          <article><strong>Explain</strong><p>Translate the visual outcome into a mathematical and practical reason.</p></article>
-          <article><strong>Implement</strong><p>Continue into Python/Jupyter course work and project practice.</p></article>
-        </div>
-      </section>
-
-      <section className="v51-campus-story" aria-labelledby="v51-campus-title">
-        <div className="shell">
-          <div className="v51-campus-story__head">
-            <div>
-              <span className="eyebrow">Vidyashilp University</span>
-              <h2 id="v51-campus-title">
-                Built for learning that moves between ideas and practice.
-              </h2>
-            </div>
-            <p>
-              DATA301 belongs to a wider academic environment where conceptual
-              foundations, experimentation, implementation, and independent
-              judgement reinforce one another.
-            </p>
-          </div>
-
-          <div className="v51-campus-mosaic">
-            <figure className="v51-campus-mosaic__hero">
-              <Image
-                src="/campus/vu-campus-hero.webp"
-                alt="Vidyashilp University campus"
-                fill
-                sizes="(max-width: 900px) 100vw, 62vw"
-              />
-            </figure>
-
-            <figure className="v51-campus-mosaic__detail">
-              <Image
-                src="/campus/vu-campus-detail.webp"
-                alt="Architectural detail at Vidyashilp University"
-                fill
-                sizes="(max-width: 900px) 100vw, 32vw"
-              />
-            </figure>
-
-            <figure className="v51-campus-mosaic__atmosphere">
-              <Image
-                src="/campus/vu-campus-atmosphere.webp"
-                alt="Academic environment at Vidyashilp University"
-                fill
-                sizes="(max-width: 900px) 100vw, 32vw"
-              />
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--paper">
-        <div className="shell credits-cosmic">
-          <div>
-            <Image src="/brand/vidyashilp-university.png" alt="Vidyashilp University" width={210} height={76} />
-            <span className="eyebrow">Academic context</span>
-            <h2>DATA301 · Machine Learning</h2>
-            <p>Course instruction and academic materials: {platform.instructor.name}, Vidyashilp University.</p>
-            <Link href={platform.universityUrl} target="_blank" rel="noreferrer">Visit Vidyashilp University <Icon name="external" size={16} /></Link>
-          </div>
-          <div className="credits-cosmic__developer">
-            <span className="eyebrow">Platform development</span>
-            <h2>{platform.developer.name}</h2>
-            <p>{platform.developer.role}. Product architecture, interface design, interactive laboratories, backend integration, release engineering, and ongoing platform development.</p>
-            <div><Link href={platform.developer.repository} target="_blank" rel="noreferrer"><Icon name="github" size={18} /> View source repository</Link><Link href={platform.developer.github} target="_blank" rel="noreferrer">Developer profile <Icon name="external" size={16} /></Link></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section shell"><div className="rights-note"><Icon name="spark" /><p><strong>Attribution boundary:</strong> platform software and original interactive experiences are credited to Krishna V Gowda; course content and supplied academic materials remain attributed to Dr. Shabbeer Basha and Vidyashilp University.</p></div></section>
-    </main>
-  );
+  return <main id="main-content" className="d6-page d6-about">
+    <section className="d6-about-hero"><div className="d6-shell"><p className="d6-eyebrow">DATA301 · Vidyashilp University</p><h1>Learning happens in a place.<em>It should feel like one.</em></h1><p>DATA301 ML Studio is a course environment designed around seeing, changing, explaining and implementing machine-learning ideas.</p></div></section>
+    <figure className="d6-about-photo"><Image src="/campus/vu-campus-hero.webp" alt="Vidyashilp University campus" fill priority sizes="100vw"/><figcaption><span>Vidyashilp University</span><span>School of Engineering &amp; Technology</span></figcaption></figure>
+    <section className="d6-about-setting"><div><p className="d6-eyebrow">The setting</p><h2>A university course with a digital front door.</h2></div><div><p>DATA301 sits within the School of Engineering &amp; Technology. The platform carries that context into the interface: a real course sequence, real laboratories, published material, instructor administration and a visible connection to campus.</p><Link href="/course">Explore the course <Icon name="arrow" size={15}/></Link></div></section>
+    <section className="d6-about-philosophy"><div className="d6-shell d6-about-philosophy__grid"><div><p className="d6-eyebrow d6-eyebrow--light">Learning philosophy</p><h2>See it.<br/>Change it.<br/>Explain it.</h2></div><div className="d6-about-principles">{[['01','See','Visualize boundaries, residuals, margins, clusters and metrics.'],['02','Change','Manipulate parameters and observe the consequence of each decision.'],['03','Explain','Connect model behaviour to mathematical and practical reasoning.'],['04','Implement','Carry the idea into Python, evaluation, experiments and projects.']].map(([n,t,p])=><article className="d6-about-principle" key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div></div></section>
+    <section className="d6-about-collage"><div className="d6-shell"><div className="d6-about-collage__head"><div><p className="d6-eyebrow">Around the university</p><h2>One course.<br/>One real campus.</h2></div><p>The photographic layer is intentionally secondary to the academic experience: place gives the product identity, while the course remains the subject.</p></div><div className="d6-about-collage__grid"><figure className="d6-about-collage__main"><Image src="/campus/vu-campus-building.webp" alt="Vidyashilp University academic buildings" fill sizes="(max-width: 760px) 100vw, 67vw"/><figcaption>Academic buildings</figcaption></figure><div className="d6-about-collage__stack"><figure><Image src="/campus/vu-campus-detail.webp" alt="Vidyashilp University architecture" fill sizes="(max-width: 760px) 100vw, 33vw"/><figcaption>Architecture</figcaption></figure><figure><Image src="/campus/vu-campus-atmosphere.webp" alt="Vidyashilp University campus atmosphere" fill sizes="(max-width: 760px) 100vw, 33vw"/><figcaption>Campus atmosphere</figcaption></figure></div></div></div></section>
+    <section className="d6-about-colophon"><div className="d6-shell d6-about-colophon__grid"><div><p className="d6-eyebrow">Academic context</p><h2>DATA301<br/>Machine Learning</h2><p>Course instruction and academic materials by {platform.instructor.name}, Vidyashilp University.</p><Link href={platform.universityUrl} target="_blank" rel="noreferrer">Vidyashilp University <Icon name="external" size={14}/></Link></div><div><p className="d6-eyebrow">Platform development</p><h2>{platform.developer.name}</h2><p>{platform.developer.role}. Product architecture, interface design, interactive laboratories, backend integration and release engineering.</p><Link href={platform.developer.repository} target="_blank" rel="noreferrer">Source repository <Icon name="github" size={15}/></Link></div></div></section>
+  </main>;
 }

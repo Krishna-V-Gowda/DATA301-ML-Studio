@@ -57,7 +57,7 @@ test('material fallback contains exactly three public resources and no private p
   assert.equal(materials.some((material) => /course plan/i.test(material.title)), false);
   assert.deepEqual(materials.map((material) => material.title), [
     'DATA301 Course Overview',
-    'Module 1: Introduction to Machine Learning',
+    'Module 1 — Implementation Guide',
     'Module 2: Supervised Learning Techniques and Evaluation Metrics',
   ]);
 });

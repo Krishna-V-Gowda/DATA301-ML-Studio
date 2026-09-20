@@ -1,62 +1,20 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import { ResourceLibrary } from '@/components/ResourceLibrary';
-import { Icon } from '@/components/ui/Icon';
-import { bibliography } from '@/lib/course-data';
 import { getPublishedMaterials } from '@/lib/supabase/queries';
+import { ResourceLibrary } from '@/components/ResourceLibrary';
+import { platform } from '@/lib/platform';
 
-export const metadata: Metadata = {
-  title: 'Course Resources',
-  description: 'The DATA301 Course Overview, Module 1 and Module 2 presentations, and instructor-managed learning resources.',
+export const metadata: Metadata = { title: 'Resources', description: 'Published DATA301 course materials, references, and learning resources.' };
+
+const bibliography = {
+  textbooks: ['Tom M. Mitchell, Machine Learning.', 'Ethem Alpaydin, Introduction to Machine Learning.'],
+  references: ['Christopher M. Bishop, Pattern Recognition and Machine Learning.', 'Trevor Hastie, Robert Tibshirani, Jerome Friedman, The Elements of Statistical Learning.'],
 };
 
 export default async function ResourcesPage() {
   const materials = await getPublishedMaterials();
-  const hasModule2 = materials.some((material) => material.moduleSlug === 'supervised-learning');
-
-  return (
-    <main id="main-content" className="v51-route v51-route--resources">
-      <section className="resource-hero-cosmic">
-        <Image src="/campus/vu-campus-courtyard.webp" alt="" fill priority sizes="100vw" />
-        <div className="resource-hero-cosmic__veil" />
-        <div className="shell resource-hero-cosmic__grid">
-          <div>
-            <span className="eyebrow eyebrow--light">DATA301 resource library</span>
-            <h1>Start with the course.<br /><em>Continue with the class.</em></h1>
-            <p>The Course Overview is always first. Released module presentations, notes, datasets, labs, and assignments follow as the semester progresses.</p>
-          </div>
-          <aside className="resource-hero-cosmic__status">
-            <span>Live library</span>
-            <strong>{materials.length}</strong>
-            <small>published resource{materials.length === 1 ? '' : 's'}</small>
-            <div><i className={hasModule2 ? 'is-live' : ''} /><span>Module 2 {hasModule2 ? 'available' : 'syncing'}</span></div>
-          </aside>
-        </div>
-      </section>
-
-      <section className="section shell resource-library-cosmic">
-        <div className="resource-order-note">
-          <Icon name="book" size={24} />
-          <div><strong>Learning order</strong><span>Course Overview → Module 2 → Module 1 → latest released material</span></div>
-        </div>
-        <ResourceLibrary materials={materials} />
-        <aside className="private-resource-callout">
-          <Icon name="lock" size={24} />
-          <div><strong>Detailed Course Plan</strong><p>The internal 15-week planning document is retained in private course storage and is available only to approved administrators through the instructor portal.</p></div>
-          <Link href="/admin/login">Instructor access <Icon name="arrow" size={16} /></Link>
-        </aside>
-      </section>
-
-      <section className="section section--paper">
-        <div className="shell bibliography-grid">
-          <div><span className="eyebrow">Reading foundation</span><h2>Textbooks and references named in the course material.</h2><p>The supplied files list bibliographic references but do not provide verified download URLs for most titles, so the platform presents citations without fabricating links.</p></div>
-          <div className="bibliography-list">
-            <section><h3>Textbooks</h3><ol>{bibliography.textbooks.map((item) => <li key={item}>{item}</li>)}</ol></section>
-            <section><h3>References</h3><ol>{bibliography.references.map((item) => <li key={item}>{item}</li>)}</ol></section>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+  return <main id="main-content" className="d6-page d6-resources">
+    <section className="d6-resource-hero"><div className="d6-shell d6-resource-hero__grid"><div><p className="d6-eyebrow">Resource library · DATA301</p><h1>Find the material.<em>Keep moving.</em></h1></div><div><p>The library is deliberately quiet: published course material, reliable metadata and a fast path to the next useful resource.</p><div className="d6-resource-count"><span>Published resources</span><strong>{materials.length}</strong></div></div></div></section>
+    <section className="d6-resource-zone"><div className="d6-shell"><div className="d6-resource-layout"><div><p className="d6-resource-order">Course Overview → released modules → laboratories → latest published material</p><ResourceLibrary materials={materials}/></div><aside className="d6-resource-toolbar"><p className="d6-resource-toolbar__label">Library notes</p><p style={{margin:0,color:'var(--d6-ink-2)',fontSize:13,lineHeight:1.6}}>Public students see released material only. Instructor-managed planning remains protected behind authenticated access.</p><Link className="d6-text-link" href="/admin/login" style={{marginTop:20}}>Instructor portal <span>→</span></Link></aside></div><div className="d6-resource-reference"><div><p className="d6-eyebrow">Reading foundation</p><h2>References named in the course material.</h2><p>The library separates published files from bibliographic context; it never invents download links that are not supplied by the academic source.</p></div><div><div><p className="d6-smallcaps">Textbooks</p><ol>{bibliography.textbooks.map((item)=><li key={item}>{item}</li>)}</ol></div><div style={{marginTop:26}}><p className="d6-smallcaps">References</p><ol>{bibliography.references.map((item)=><li key={item}>{item}</li>)}</ol></div></div></div></div></section>
+  </main>;
 }

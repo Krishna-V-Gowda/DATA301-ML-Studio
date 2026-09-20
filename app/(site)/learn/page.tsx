@@ -1,85 +1,14 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
-import { LearningRoadmap } from '@/components/LearningRoadmap';
-import { SectionHeading } from '@/components/SectionHeading';
-import { Icon } from '@/components/ui/Icon';
 import { modules } from '@/lib/course-data';
-import { topics } from '@/lib/topic-data';
+import { platform } from '@/lib/platform';
+import { Icon } from '@/components/ui/Icon';
 
-export const metadata: Metadata = {
-  title: 'Learning Roadmap',
-  description: 'Follow the DATA301 Machine Learning learning path across four connected modules.',
-};
+export const metadata = { title: 'Learning Atlas', description: 'DATA301 learning roadmap with all thirty lecture sessions and connected practice.' };
 
 export default function LearnPage() {
-  return (
-    <main id="main-content" className="v51-route v51-route--learn">
-      <section className="page-hero page-hero--roadmap">
-        <div className="shell page-hero__grid">
-          <div>
-            <span className="eyebrow">Learning roadmap</span>
-            <h1>Build the mental model in the right order.</h1>
-            <p>
-              Start with the data and vocabulary, learn supervised and unsupervised techniques, then bring everything together through evaluation, regularization, and perceptron-based models.
-            </p>
-          </div>
-          <div className="page-hero__stats">
-            <div><strong>4</strong><span>modules</span></div>
-            <div><strong>30</strong><span>lecture sessions</span></div>
-            <div><strong>{topics.length}</strong><span>published concepts</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section shell roadmap-page">
-        <LearningRoadmap />
-      </section>
-
-      <section className="section section--paper">
-        <div className="shell">
-          <SectionHeading
-            eyebrow="Published concept library"
-            title="Enter through a module—or jump directly to a concept."
-            description="Topic pages follow a consistent rhythm: intuition, purpose, visualization, mathematics, algorithm, implementation, limitations, and practice."
-          />
-          <div className="topic-directory">
-            {modules.map((module) => {
-              const moduleTopics = topics.filter((topic) => topic.moduleSlug === module.slug);
-              return (
-                <section className="topic-group" key={module.slug}>
-                  <div className={`topic-group__number topic-group__number--${module.accent}`}>0{module.number}</div>
-                  <div className="topic-group__content">
-                    <div className="topic-group__heading">
-                      <div><span>Module {module.number}</span><h2>{module.shortTitle}</h2></div>
-                      <Link href={`/learn/module/${module.slug}`}>Module overview <Icon name="arrow" size={17} /></Link>
-                    </div>
-                    {moduleTopics.length ? (
-                      <div className="topic-list">
-                        {moduleTopics.map((topic) => (
-                          <Link href={`/topics/${topic.slug}`} key={topic.slug}>
-                            <div>
-                              <span>{topic.difficulty} · {topic.estimatedMinutes} min</span>
-                              <h3>{topic.title}</h3>
-                              <p>{topic.oneLine}</p>
-                            </div>
-                            <Icon name="chevron" />
-                          </Link>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="empty-state-inline v51-upcoming">
-                          <span>Upcoming with course progression</span>
-                          <strong>Module lessons are being released in teaching order.</strong>
-                          <p>Use the module overview now; rich concept lessons will appear here as the class reaches this stage.</p>
-                        </div>
-                    )}
-                  </div>
-                </section>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+  return <main id="main-content" className="d6-page d6-learn">
+    <section className="d6-learn-map"><div className="d6-shell"><div className="d6-learn-map__intro"><div><p className="d6-eyebrow">Learning atlas · DATA301</p><h1>See how the pieces <em>become a model.</em></h1></div><p>Thirty lectures form one sequence: foundations first, supervised learning next, then structure, evaluation, regularization and model building. Each module keeps its lectures, practice and related laboratories in view.</p></div><div className="d6-learn-summary"><div><strong>4</strong><span>modules</span></div><div><strong>30</strong><span>lecture sessions</span></div><div><strong>30</strong><span>practice sessions</span></div><div><strong>12</strong><span>connected labs</span></div></div></div></section>
+    <section className="d6-learning-atlas"><div className="d6-shell">{modules.map((module)=><article className="d6-learning-module" key={module.slug}><div className="d6-learning-module__index"><strong>0{module.number}</strong><span>{module.level}</span></div><div><div className="d6-learning-module__head"><div><p className="d6-eyebrow">Module {module.number}</p><h2>{module.shortTitle}</h2></div><p>{module.description}</p></div><div className="d6-session-grid">{module.lectures.map((lecture)=><Link href={`/learn/module/${module.slug}`} className="d6-session" key={lecture.number}><span className="d6-session__num">{String(lecture.number).padStart(2,'0')}</span><h3>{lecture.title}</h3>{lecture.practice ? <p className="d6-session__practice">{lecture.practice.code} · {lecture.practice.title}</p> : null}</Link>)}</div><div style={{marginTop:'17px'}}><Link className="d6-text-link" href={`/learn/module/${module.slug}`}>Open module <span>→</span></Link></div></div></article>)}</div></section>
+    <section className="d6-learn-bridge"><div className="d6-shell d6-learn-bridge__grid"><div><p className="d6-eyebrow d6-eyebrow--light">Implementation path</p><h2>Move from visual intuition to Python and Jupyter.</h2><p>The browser laboratories are the conceptual bridge. The instructor&apos;s official repository remains the practical notebook environment.</p></div><Link className="d6-button" href={platform.instructor.github} target="_blank" rel="noreferrer">Course ML Lab <Icon name="external" size={15}/></Link></div></section>
+  </main>;
 }

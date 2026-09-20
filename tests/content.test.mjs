@@ -181,6 +181,28 @@ test('the professor-facing Labs directory exposes twelve live labs and no planne
   assert.doesNotMatch(labsPage, /planned/i);
 });
 
+test('project directions are real navigation surfaces with matching briefs', () => {
+  const projectsPage = source('app/(site)/projects/page.tsx');
+  const projectData = source('lib/project-data.ts');
+  const routeRoot = resolve(projectRoot, 'app/(site)/projects');
+  const expected = [
+    'house-price-regression-audit',
+    'customer-segmentation-study',
+    'imbalanced-classification-investigation',
+    'small-data-transfer-compression-study',
+  ];
+
+  assert.match(projectsPage, /<Link[\s\S]*href=\{`\/projects\/\$\{project\.slug\}`\}/);
+  for (const slug of expected) {
+    assert.ok(projectData.includes(`slug: '${slug}'`) || projectData.includes(`slug: \"${slug}\"`), slug);
+    assert.ok(existsSync(resolve(routeRoot, '[slug]')), 'project detail route missing');
+  }
+  assert.match(projectData, /level:/);
+  assert.match(projectData, /objective:/);
+  assert.match(projectData, /concepts:/);
+  assert.match(projectData, /output:/);
+});
+
 test('course search indexes every released interactive lab and all Module 2 topics', () => {
   const documents = buildSearchDocuments();
   const indexedLabs = documents.filter((document) => document.type === 'Lab');

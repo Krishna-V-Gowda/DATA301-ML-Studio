@@ -1,99 +1,24 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import { CourseOverviewPanel } from '@/components/CourseOverviewPanel';
-import { ModuleCard } from '@/components/ModuleCard';
-import { Icon } from '@/components/ui/Icon';
 import { course, modules, outcomes } from '@/lib/course-data';
 import { platform } from '@/lib/platform';
+import { Icon } from '@/components/ui/Icon';
 
-export const metadata: Metadata = {
-  title: 'Course Overview',
-  description: 'The official DATA301 course structure, outcomes, learning architecture, and instructor context.',
-};
+export const metadata: Metadata = { title: 'Course', description: 'DATA301 Machine Learning course overview, outcomes, structure, and instructor.' };
 
 export default function CoursePage() {
-  return (
-    <main id="main-content" className="v51-route v51-route--course">
-      <section className="course-hero-cosmic">
-        <Image src="/campus/vu-campus-atmosphere.webp" alt="" fill priority sizes="100vw" />
-        <div className="course-hero-cosmic__veil" />
-        <div className="shell course-hero-cosmic__layout">
-          <div>
-            <span className="eyebrow eyebrow--light">{course.code} · Course overview</span>
-            <h1>{course.title}</h1>
-            <p>{course.description}</p>
-            <div className="course-hero-cosmic__actions">
-              <Link className="button button--light" href="/learn">Learning roadmap <Icon name="arrow" /></Link>
-              <Link className="button button--glass" href="/resources">Course materials <Icon name="book" /></Link>
-            </div>
-          </div>
-          <aside className="course-hero-cosmic__identity">
-            <Image src="/brand/vidyashilp-university.png" alt="Vidyashilp University" width={220} height={80} />
-            <span>School of Engineering & Technology</span>
-            <strong>Semester {course.semester} · {course.credits} credits</strong>
-            <small>{course.durationWeeks} weeks · {course.lectureHours} lecture hours · {course.practiceHours} practice hours</small>
-          </aside>
-        </div>
-      </section>
+  return <main id="main-content" className="d6-page d6-course">
+    <section className="d6-course-hero"><div className="d6-shell">
+      <div className="d6-course-hero__grid"><div><p className="d6-eyebrow">The course · DATA301</p><h1>Understand the model.<em>Defend the decision.</em></h1></div><div className="d6-course-hero__body"><p>{course.description}</p><div className="d6-home-actions"><Link className="d6-button d6-button--dark" href="/learn">Open the learning atlas <Icon name="arrow" size={15}/></Link><Link className="d6-button d6-button--light" href="/labs">Enter the laboratories <Icon name="arrow" size={15}/></Link></div></div></div>
+      <div className="d6-course-facts">{[['Course',course.code],['Semester',course.semester],['Credits',String(course.credits)],['Duration',`${course.durationWeeks} weeks`],['Lecture',`${course.lectureHours} hours`],['Practice',`${course.practiceHours} hours`]].map(([label,value])=><div className="d6-course-fact" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
+    </div></section>
 
-      <section className="section shell"><CourseOverviewPanel /></section>
+    <section className="d6-course-section"><div className="d6-shell d6-course-anatomy"><div><p className="d6-eyebrow">Course anatomy</p><h2>A connected sequence, from foundations to model building.</h2></div><div className="d6-course-anatomy__body"><p>DATA301 develops a practical and conceptual foundation across regression, classification, clustering, dimensionality reduction, evaluation, regularization and perceptron-based models.</p><p>Python practice accompanies the lecture sequence so students can move from understanding a method to inspecting what it actually does.</p><div className="d6-callout"><span>Prerequisite</span><strong>{course.prerequisite}</strong></div></div></div></section>
 
-      <section className="section section--paper">
-        <div className="shell course-intent-grid">
-          <div>
-            <span className="eyebrow">The course intent</span>
-            <h2>From algorithm vocabulary to defensible model decisions.</h2>
-            <p>
-              DATA301 develops a practical and conceptual foundation in regression, classification,
-              clustering, dimensionality reduction, evaluation, regularization, and perceptron-based models.
-              Python practice accompanies the lecture sequence throughout the semester.
-            </p>
-            <div className="course-prerequisite"><span>Prerequisite</span><strong>{course.prerequisite}</strong></div>
-          </div>
-          <div className="outcome-matrix">
-            {outcomes.map((outcome) => (
-              <article key={outcome.code}><span>{outcome.code}</span><p>{outcome.description}</p><strong>{outcome.level}</strong></article>
-            ))}
-          </div>
-        </div>
-      </section>
+    <section className="d6-course-section d6-course-outcomes"><div className="d6-shell d6-course-outcomes"><p className="d6-eyebrow">Learning outcomes</p><h2>Four outcomes shape the work.</h2><div className="d6-outcome-list">{outcomes.map((item)=><div className="d6-outcome" key={item.code}><span className="d6-outcome__code">{item.code}</span><p>{item.description}</p><span className="d6-outcome__level">{item.level}</span></div>)}</div></div></section>
 
-      <section className="section shell">
-        <div className="content-heading content-heading--wide"><span className="eyebrow">Course structure</span><h2>Four modules. One cumulative learning journey.</h2><p>Each stage contributes concepts and practices required by the next.</p></div>
-        <div className="module-grid module-grid--cosmic">{modules.map((module) => <ModuleCard key={module.slug} module={module} />)}</div>
-      </section>
+    <section className="d6-course-section"><div className="d6-shell d6-course-modules"><p className="d6-eyebrow">Course structure</p><h2>Four modules. Thirty sessions.</h2><div className="d6-module-rows">{modules.map((module)=><Link className="d6-module-row" href={`/learn/module/${module.slug}`} key={module.slug}><span className="d6-module-row__num">0{module.number}</span><div><h3>{module.shortTitle}</h3><p>{module.takeaway}</p></div><div className="d6-module-row__meta"><span>{module.lectureSessions} lecture</span><span>{module.practiceSessions} practice</span></div><span className="d6-module-row__arrow">→</span></Link>)}</div></div></section>
 
-      <section className="section section--ink">
-        <div className="shell instructor-course-panel">
-          <div className="instructor-course-panel__portrait" aria-hidden="true"><span>SB</span><i /><i /></div>
-          <div>
-            <span className="eyebrow eyebrow--light">Course instructor</span>
-            <h2>{platform.instructor.name}</h2>
-            <p>Associate Professor, School of Engineering & Technology, Vidyashilp University, Bengaluru.</p>
-            <div className="instructor-course-panel__themes"><span>Deep model compression</span><span>Active learning</span><span>Domain adaptation</span><span>Continual learning</span></div>
-          </div>
-          <div className="instructor-course-panel__links">
-              <Link href="/instructor">
-                Meet the course instructor <Icon name="arrow" size={16} />
-              </Link>
-              <Link href={platform.instructor.portfolio} target="_blank" rel="noreferrer">
-                Academic profile <Icon name="external" size={16} />
-              </Link>
-              <Link href={platform.instructor.github} target="_blank" rel="noreferrer">
-                Course ML Lab repository <Icon name="github" size={17} />
-              </Link>
-            </div>
-        </div>
-      </section>
-
-      <section className="section shell">
-        <div className="private-plan-note">
-          <Icon name="lock" size={28} />
-          <div><span className="eyebrow">Instructor-managed document</span><h2>The detailed course plan remains private.</h2><p>Students receive the public course overview and released learning materials. The detailed planning document stays inside the authenticated instructor portal.</p></div>
-          <Link className="button button--quiet" href="/admin/login">Instructor portal <Icon name="arrow" /></Link>
-        </div>
-      </section>
-    </main>
-  );
+    <section className="d6-course-instructor"><div className="d6-shell d6-course-instructor__grid"><div className="d6-course-instructor__number">FACULTY<br/>01</div><div><p className="d6-eyebrow d6-eyebrow--light">Course instructor</p><h2>{platform.instructor.name}</h2><p>Associate Professor · School of Engineering &amp; Technology · Vidyashilp University</p></div><div className="d6-course-instructor__links"><Link href="/instructor">Academic profile <Icon name="arrow" size={15}/></Link><Link href={platform.instructor.github} target="_blank" rel="noreferrer">ML Lab repository <Icon name="external" size={14}/></Link></div></div></section>
+  </main>;
 }

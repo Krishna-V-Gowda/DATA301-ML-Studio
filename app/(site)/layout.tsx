@@ -1,17 +1,12 @@
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { headers } from 'next/headers';
 
-export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const requestHeaders = await headers();
-  const pathname = requestHeaders.get('x-nextjs-url') ?? requestHeaders.get('referer') ?? '';
-  const isHome = pathname === '/' || pathname.endsWith('/');
-
+export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="site-frame">
+    <div className="site-frame d6-frame">
       <SiteHeader />
       {children}
-      <SiteFooter compact={!isHome} />
+      <SiteFooter />
     </div>
   );
 }

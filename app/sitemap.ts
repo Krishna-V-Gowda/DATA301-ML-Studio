@@ -3,6 +3,7 @@ import { modules } from '@/lib/course-data';
 import { topics } from '@/lib/topic-data';
 import { getSiteUrl } from '@/lib/site-url';
 import { labs } from '@/lib/labs-data';
+import { projectBriefs } from '@/lib/project-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
@@ -28,6 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: .85,
+    })),
+    ...projectBriefs.map((project) => ({
+      url: `${base}/projects/${project.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: .72,
+    })),
+    ...['public-course-guide', 'public-lab-guide', 'public-module-2-guide'].map((id) => ({
+      url: `${base}/resources/read/${id}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: .68,
     })),
     ...topics.map((topic) => ({
       url: `${base}/topics/${topic.slug}`,

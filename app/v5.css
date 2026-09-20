@@ -301,3 +301,1161 @@ html[data-theme='dark'] .cosmic-hero .button--glass, html[data-theme='dark'] .co
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
 }
+
+/* ========================================================================
+   DATA301 V5.1 - ULTRA POLISH / RELEASE VISUAL FINISH
+   Loaded after globals.css and cosmic.css.
+   Visual-only corrections: image composition, foreground contrast,
+   surfaces, navigation/footer finish. No content, route, data, auth,
+   or laboratory behavior changes.
+   ======================================================================== */
+
+/* -----------------------------
+   Institutional photography
+   ----------------------------- */
+.v51-institution__image img,
+.final-course-hero__image img,
+.final-about-hero-image img,
+.final-projects-campus img,
+.final-about-campus img,
+.resource-hero-cosmic > img,
+.cosmic-hero__photo {
+  display: block;
+}
+
+.v51-institution__image img {
+  object-fit: cover;
+  object-position: 54% 52%;
+  transform: scale(1.006);
+}
+
+.final-course-hero__image img {
+  object-fit: cover;
+  object-position: 50% 57%;
+  transform: scale(1.003);
+}
+
+.final-about-hero-image img {
+  object-fit: cover;
+  object-position: 50% 52%;
+  transform: scale(1.003);
+}
+
+.final-projects-campus img {
+  object-fit: cover;
+  object-position: 50% 53%;
+  transform: scale(1.003);
+}
+
+.final-about-campus__large img {
+  object-position: 50% 52%;
+}
+
+.final-about-campus__stack figure:first-child img {
+  object-position: 50% 49%;
+}
+
+.final-about-campus__stack figure:last-child img {
+  object-position: 50% 52%;
+}
+
+.resource-hero-cosmic > img {
+  object-position: 50% 53%;
+  transform: scale(1.006);
+}
+
+.cosmic-hero__photo {
+  object-position: 56% 55%;
+}
+
+/* Keep the institutional image containers visually intentional. */
+.v51-institution,
+.final-course-hero__image,
+.final-about-hero-image figure,
+.final-projects-campus figure,
+.final-about-campus__large,
+.final-about-campus__stack figure {
+  isolation: isolate;
+}
+
+/* -----------------------------
+   Header: quiet, exact, institutional
+   ----------------------------- */
+.v51-header {
+  background: rgba(247, 245, 239, 0.965);
+  border-bottom: 1px solid rgba(24, 36, 45, 0.14);
+  box-shadow: 0 1px 0 rgba(255,255,255,.45);
+}
+
+.v51-nav__link {
+  color: #53606a;
+}
+
+.v51-nav__link.is-active,
+.v51-nav__link:hover {
+  color: #18262f;
+}
+
+.v51-nav__link::after {
+  height: 2px;
+  bottom: -10px;
+  background: #a91c3a;
+}
+
+.v51-icon-button {
+  border: 1px solid rgba(24, 36, 45, .16);
+  background: rgba(255,255,255,.72);
+  box-shadow: none;
+}
+
+.v51-icon-button:hover {
+  border-color: rgba(24, 36, 45, .34);
+  background: #fffdf8;
+}
+
+/* -----------------------------
+   Dark surfaces: absolute contrast discipline
+   ----------------------------- */
+.v51-labs,
+.final-course-instructor,
+.final-project-expectations,
+.final-about-philosophy,
+.final-instructor-research,
+.v51-footer {
+  color: #fffdf8 !important;
+  -webkit-text-fill-color: currentColor;
+}
+
+.v51-labs h1,
+.v51-labs h2,
+.v51-labs h3,
+.v51-labs p,
+.v51-labs span,
+.v51-labs strong,
+.v51-labs a,
+.final-course-instructor h1,
+.final-course-instructor h2,
+.final-course-instructor h3,
+.final-course-instructor p,
+.final-course-instructor span,
+.final-course-instructor strong,
+.final-course-instructor a,
+.final-project-expectations h1,
+.final-project-expectations h2,
+.final-project-expectations h3,
+.final-project-expectations p,
+.final-project-expectations span,
+.final-project-expectations strong,
+.final-project-expectations li,
+.final-project-expectations a,
+.final-about-philosophy h1,
+.final-about-philosophy h2,
+.final-about-philosophy h3,
+.final-about-philosophy p,
+.final-about-philosophy span,
+.final-about-philosophy strong,
+.final-about-philosophy a,
+.final-instructor-research h1,
+.final-instructor-research h2,
+.final-instructor-research h3,
+.final-instructor-research p,
+.final-instructor-research span,
+.final-instructor-research strong,
+.final-instructor-research a,
+.v51-footer h1,
+.v51-footer h2,
+.v51-footer h3,
+.v51-footer p,
+.v51-footer span,
+.v51-footer a {
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  text-shadow: none;
+}
+
+.v51-labs h1,
+.v51-labs h2,
+.v51-labs h3,
+.final-course-instructor h1,
+.final-course-instructor h2,
+.final-course-instructor h3,
+.final-project-expectations h1,
+.final-project-expectations h2,
+.final-project-expectations h3,
+.final-about-philosophy h1,
+.final-about-philosophy h2,
+.final-about-philosophy h3,
+.final-instructor-research h1,
+.final-instructor-research h2,
+.final-instructor-research h3,
+.v51-footer h1,
+.v51-footer h2,
+.v51-footer h3 {
+  color: #fffdf8 !important;
+}
+
+.v51-labs p,
+.final-course-instructor p,
+.final-project-expectations p,
+.final-about-philosophy p,
+.final-instructor-research p,
+.v51-footer p {
+  color: rgba(255,253,248,.72) !important;
+}
+
+.v51-lab__body h3,
+.v51-lab__body p,
+.v51-lab__body span,
+.v51-lab__top span,
+.v51-lab__top svg {
+  color: #fffdf8 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.v51-lab__body span,
+.v51-lab__body p {
+  color: rgba(255,253,248,.70) !important;
+}
+
+.v51-lab {
+  background: rgba(255,255,255,.035);
+  border-color: rgba(255,255,255,.18);
+}
+
+.v51-lab:hover {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.30);
+}
+
+.final-course-instructor__identity p,
+.final-course-instructor__links a,
+.final-project-expectations li,
+.final-instructor-research__list strong,
+.final-instructor-research__list span,
+.final-instructor-links a {
+  color: inherit;
+}
+
+.final-course-instructor__identity p {
+  color: rgba(255,253,248,.72) !important;
+}
+
+.final-project-expectations li {
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Footer: no phantom-black typography or empty-looking CTA. */
+.v51-footer {
+  background: #0b1d2a !important;
+}
+
+.v51-footer__top,
+.v51-footer__grid,
+.v51-footer__bottom {
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+.v51-footer .v51-eyebrow {
+  color: rgba(255,253,248,.72) !important;
+}
+
+.v51-footer .v51-button--light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 18px;
+  color: #102b42 !important;
+  -webkit-text-fill-color: #102b42 !important;
+  background: #fffdf8 !important;
+  border: 1px solid rgba(255,255,255,.36) !important;
+  box-shadow: none !important;
+}
+
+.v51-footer .v51-button--light svg {
+  color: #102b42 !important;
+}
+
+.v51-footer__brand img {
+  max-width: 160px;
+}
+
+/* -----------------------------
+   Editorial quietness on light surfaces
+   ----------------------------- */
+.v51-home,
+.final-course,
+.final-about,
+.final-projects,
+.final-instructor {
+  background: #f4f0e7;
+}
+
+.final-course-facts,
+.final-outcomes__list,
+.final-course-modules__list,
+.final-project-list__items,
+.final-instructor-research__list {
+  border-color: rgba(24,36,45,.18);
+}
+
+.final-module-row,
+.final-project-list__items article,
+.final-instructor-research__list > div {
+  border-color: rgba(24,36,45,.16);
+}
+
+.final-module-row:hover,
+.final-project-list__items article:hover {
+  background: rgba(23,56,82,.025);
+}
+
+/* The campus block should feel like a feature spread, not a card widget. */
+.v51-institution {
+  box-shadow: 0 18px 60px rgba(19,36,46,.06);
+  border-color: rgba(24,36,45,.16);
+}
+
+.v51-institution__copy h2 {
+  max-width: 8ch;
+}
+
+/* -----------------------------
+   Motion: elegant rather than playful
+   ----------------------------- */
+.v51-lab:hover,
+.final-module-row:hover,
+.final-project-list__items article:hover,
+.final-instructor-research__list > div:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .v51-institution__image img,
+  .final-course-hero__image img,
+  .final-about-hero-image img,
+  .final-projects-campus img,
+  .final-about-campus img,
+  .resource-hero-cosmic > img {
+    transform: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .v51-icon-button {
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .v51-footer .v51-button--light {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v51-lab:hover,
+  .final-module-row:hover,
+  .final-project-list__items article:hover,
+  .final-instructor-research__list > div:hover {
+    transform: none !important;
+  }
+}
+
+/* END DATA301 V5.1 - ULTRA POLISH */
+
+/* ========================================================================
+   DATA301 V5.1 - ULTRA FINAL VISUAL QA
+   Last-mile polish only. Existing IA, content, functionality and data remain.
+   ======================================================================== */
+
+:root {
+  --v51-ultra-paper: #f6f3eb;
+  --v51-ultra-paper-quiet: #fbf9f4;
+  --v51-ultra-ink: #18242c;
+  --v51-ultra-navy: #102d43;
+  --v51-ultra-red: #b31f3c;
+  --v51-ultra-gold: #d39b58;
+}
+
+body {
+  background: var(--v51-ultra-paper);
+}
+
+.v51-home,
+.v51-route--course,
+.v51-route--projects,
+.v51-route--about,
+.v51-route--resources {
+  background: var(--v51-ultra-paper);
+}
+
+/* Header: one quiet institutional rule; keep the existing logo treatment. */
+.v51-header {
+  background: rgba(248, 246, 240, .96);
+  border-bottom: 1px solid rgba(24, 36, 44, .16);
+  box-shadow: 0 1px 0 rgba(255,255,255,.8);
+}
+
+.v51-header__inner {
+  min-height: 76px;
+}
+
+.v51-nav__link::after {
+  height: 2px;
+  background: var(--v51-ultra-red);
+}
+
+/* Flagship home opening: keep the hero airy, but anchor it vertically. */
+.v51-home .v51-hero {
+  min-height: min(780px, calc(100svh - 76px));
+  display: grid;
+  align-items: center;
+  padding-top: clamp(54px, 6.5vw, 88px);
+  padding-bottom: clamp(62px, 7vw, 96px);
+}
+
+.v51-home .v51-hero__grid {
+  align-items: center;
+}
+
+.v51-home .v51-hero h1 {
+  max-width: 11ch;
+}
+
+.v51-home .v51-figure {
+  transform: translateY(2px);
+}
+
+/* Use the building as the subject rather than allowing a sky-dominant crop. */
+.v51-institution {
+  min-height: 0;
+  border: 1px solid rgba(24,36,44,.12);
+  background: var(--v51-ultra-paper-quiet);
+}
+
+.v51-institution__image {
+  min-height: clamp(430px, 38vw, 560px);
+}
+
+.v51-institution__image img {
+  object-position: 50% 71%;
+  transform: scale(1.045);
+}
+
+.v51-institution__copy {
+  padding: clamp(38px, 4.5vw, 70px);
+}
+
+.v51-institution__copy h2 {
+  max-width: 8ch;
+}
+
+/* Panoramic photography is used only where the source crop supports it. */
+.final-course-hero__image,
+.final-about-hero-image figure,
+.final-projects-campus figure {
+  border: 1px solid rgba(24,36,44,.12);
+  background: #e9e5da;
+}
+
+.final-course-hero__image {
+  min-height: clamp(390px, 42vw, 600px);
+}
+
+.final-course-hero__image img {
+  object-position: 50% 63%;
+  transform: scale(1.025);
+}
+
+.final-course-hero__caption,
+.final-about-hero-image figcaption {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.final-about-hero-image figure {
+  min-height: clamp(360px, 38vw, 540px);
+}
+
+.final-about-hero-image img {
+  object-position: 50% 62%;
+  transform: scale(1.015);
+}
+
+.final-projects-campus figure {
+  min-height: clamp(470px, 48vw, 700px);
+}
+
+.final-projects-campus img {
+  object-position: 50% 62%;
+  transform: scale(1.025);
+}
+
+.final-about-campus__large img {
+  object-position: 50% 62%;
+}
+
+.final-about-campus__stack figure:first-child img {
+  object-position: 50% 50%;
+}
+
+.final-about-campus__stack figure:last-child img {
+  object-position: 50% 62%;
+}
+
+/* Dark surfaces: guarantee clean foreground paint against every older layer. */
+.final-course-instructor,
+.final-project-expectations,
+.final-instructor-research,
+.v51-labs,
+.v51-footer {
+  background: var(--v51-ultra-navy);
+  color: #fffdf8;
+}
+
+.final-course-instructor h2,
+.final-course-instructor p,
+.final-course-instructor span,
+.final-course-instructor strong,
+.final-course-instructor a,
+.final-project-expectations h2,
+.final-project-expectations p,
+.final-project-expectations span,
+.final-project-expectations strong,
+.final-project-expectations li,
+.final-instructor-research h2,
+.final-instructor-research p,
+.final-instructor-research span,
+.final-instructor-research strong,
+.final-instructor-research a,
+.v51-labs h2,
+.v51-labs h3,
+.v51-labs p,
+.v51-labs span,
+.v51-labs a,
+.v51-footer h2,
+.v51-footer h3,
+.v51-footer p,
+.v51-footer a {
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.final-course-instructor h2,
+.final-project-expectations h2,
+.final-instructor-research h2,
+.v51-labs h2,
+.v51-labs h3,
+.v51-footer h2,
+.v51-footer h3 {
+  color: #fffdf8 !important;
+}
+
+.final-course-instructor p,
+.final-project-expectations p,
+.final-instructor-research p,
+.v51-labs p,
+.v51-footer p {
+  color: rgba(255,253,248,.74) !important;
+}
+
+.final-project-expectations li,
+.final-instructor-research__list > div {
+  border-color: rgba(255,253,248,.18);
+}
+
+/* Instructor: academic profile, restrained scale, no product-card feel. */
+.final-instructor-opening {
+  padding-top: clamp(76px, 8.5vw, 126px);
+  padding-bottom: clamp(76px, 8.5vw, 126px);
+  background: #e9e3d6;
+}
+
+.final-instructor-name h1 {
+  font-size: clamp(4.8rem, 8.5vw, 9.2rem);
+  letter-spacing: -.075em;
+}
+
+.final-instructor-opening__aside {
+  max-width: 400px;
+}
+
+.final-instructor-profile {
+  padding-top: clamp(84px, 9vw, 128px);
+  padding-bottom: clamp(84px, 9vw, 128px);
+}
+
+.final-instructor-profile h2 {
+  max-width: 12ch;
+}
+
+.final-instructor-research {
+  padding-top: clamp(84px, 9vw, 132px);
+  padding-bottom: clamp(84px, 9vw, 132px);
+}
+
+.final-instructor-research__list > div {
+  padding-block: 18px;
+}
+
+.final-instructor-research__list strong {
+  font-size: clamp(1.45rem, 2.4vw, 2.4rem);
+  font-weight: 600;
+}
+
+.final-instructor-links a {
+  color: #fffdf8 !important;
+}
+
+.final-instructor-links a:hover {
+  color: var(--v51-ultra-gold) !important;
+}
+
+/* Labs remain the computational centerpiece rather than another SaaS card grid. */
+.v51-labs .v51-section-head h2,
+.v51-labs .v51-section-head p,
+.v51-labs .v51-section-head .v51-eyebrow,
+.v51-labs .v51-section-head .v51-text-link {
+  color: #fffdf8 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.v51-lab {
+  background: #17364e;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: none;
+}
+
+.v51-lab:hover {
+  background: #1a3b55;
+  border-color: rgba(255,255,255,.28);
+  transform: translateY(-2px);
+}
+
+.v51-lab__body h3 {
+  color: #fffdf8 !important;
+  -webkit-text-fill-color: #fffdf8 !important;
+}
+
+.v51-lab__body p {
+  color: #aebfca !important;
+  -webkit-text-fill-color: #aebfca !important;
+}
+
+.v51-lab__body span {
+  color: #d0dbe0 !important;
+  -webkit-text-fill-color: #d0dbe0 !important;
+}
+
+/* Resources: photograph reads as architecture, not wallpaper. */
+.resource-hero-cosmic > img {
+  object-position: 50% 62%;
+  transform: scale(1.018);
+  filter: saturate(.72) contrast(.98);
+}
+
+.resource-hero-cosmic__veil {
+  background:
+    linear-gradient(90deg,
+      rgba(13, 37, 54, .92) 0%,
+      rgba(13, 37, 54, .72) 48%,
+      rgba(13, 37, 54, .28) 100%);
+}
+
+.resource-hero-cosmic__status {
+  border-radius: 3px;
+  box-shadow: 0 18px 48px rgba(3,18,28,.18);
+}
+
+/* Footer: fix the exact black-on-navy failure visible in the supplied QA shots. */
+.v51-footer,
+.v51-footer--home,
+.v51-footer--compact {
+  background: #0d202d;
+  color: #fffdf8;
+}
+
+.v51-footer__top {
+  min-height: 200px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.v51-footer__top h2 {
+  color: #fffdf8 !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: #fffdf8 !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.v51-footer__top .v51-eyebrow {
+  color: #a9bac3 !important;
+  -webkit-text-fill-color: #a9bac3 !important;
+}
+
+.v51-footer__grid h3 {
+  color: #fffdf8 !important;
+}
+
+.v51-footer__brand p {
+  color: rgba(255,253,248,.68) !important;
+}
+
+.v51-footer__brand > a,
+.v51-footer nav a {
+  color: rgba(255,253,248,.76) !important;
+}
+
+.v51-footer nav a:hover,
+.v51-footer__brand > a:hover {
+  color: #fffdf8 !important;
+}
+
+.v51-footer .v51-button--light {
+  min-width: 225px;
+  justify-content: center;
+  background: #fffdf8 !important;
+  border-color: #fffdf8 !important;
+  color: #18242c !important;
+  -webkit-text-fill-color: #18242c !important;
+}
+
+.v51-footer .v51-button--light svg {
+  color: #18242c !important;
+  fill: currentColor;
+}
+
+.v51-footer__bottom,
+.v51-footer__bottom span {
+  color: #8696a3 !important;
+  -webkit-text-fill-color: #8696a3 !important;
+}
+
+.v51-footer__bottom a {
+  color: #c0cad2 !important;
+  -webkit-text-fill-color: #c0cad2 !important;
+}
+
+/* Home close: a clean institutional crimson instead of a generic alert panel. */
+.v51-final {
+  background: var(--v51-ultra-red);
+  color: #fffdf8;
+}
+
+.v51-final h2,
+.v51-final p,
+.v51-final .v51-eyebrow {
+  color: #fffdf8 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Keep controls crisp; shadows are reserved for actual computational UI. */
+.final-course .v51-button,
+.final-about .v51-button,
+.final-projects .v51-button,
+.final-instructor .v51-button,
+.v51-home .v51-button {
+  box-shadow: none;
+}
+
+.final-course .v51-button--primary,
+.v51-home .v51-button--primary {
+  background: var(--v51-ultra-navy);
+  border-color: var(--v51-ultra-navy);
+}
+
+.final-course .v51-button--primary:hover,
+.v51-home .v51-button--primary:hover {
+  background: #173b54;
+  border-color: #173b54;
+}
+
+/* ------------------------------------------------------------------------
+   Responsive guardrails
+   ------------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .v51-home .v51-hero {
+    min-height: 0;
+  }
+
+  .v51-institution__image {
+    min-height: 340px;
+  }
+
+  .final-course-hero__image,
+  .final-about-hero-image figure,
+  .final-projects-campus figure {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .v51-institution__image {
+    min-height: 300px;
+  }
+
+  .final-course-hero__image,
+  .final-about-hero-image figure,
+  .final-projects-campus figure {
+    min-height: 300px;
+  }
+
+  .final-instructor-name h1 {
+    font-size: clamp(4.2rem, 19vw, 6rem);
+  }
+
+  .v51-footer__top {
+    min-height: 0;
+  }
+
+  .v51-footer .v51-button--light {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* ========================================================================
+   DATA301 V5.1 - FINAL ART-DIRECTION CORRECTION
+   One last scoped pass. This layer supersedes earlier presentation-only
+   experiments without changing content, routes, data, auth, or lab logic.
+   ======================================================================== */
+
+/* ------------------------------------------------------------------------
+   RESOURCE LIBRARY
+   The library is an academic utility, not another SaaS hero. Use the clean
+   campus crop as a photographic anchor and remove the old full-bleed overlay.
+   ------------------------------------------------------------------------ */
+.resource-hero-editorial {
+  min-height: 0;
+  padding: clamp(38px, 5vw, 72px) 0 clamp(72px, 8vw, 112px);
+  background: var(--v51-paper, #f4f0e7);
+  color: var(--v51-ink, #18242c);
+  overflow: visible;
+}
+
+.resource-hero-editorial__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.03fr) minmax(0, .97fr);
+  align-items: stretch;
+  gap: clamp(34px, 5.5vw, 82px);
+}
+
+.resource-hero-editorial__media {
+  position: relative;
+  min-height: clamp(470px, 51vw, 650px);
+  margin: 0;
+  overflow: hidden;
+  background: #d6d0c4;
+  border: 1px solid rgba(24, 36, 44, .14);
+}
+
+.resource-hero-editorial__media img {
+  object-fit: cover;
+  object-position: center 55%;
+  transform: scale(1.005);
+}
+
+.resource-hero-editorial__media::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, transparent, rgba(11, 26, 37, .34));
+  pointer-events: none;
+}
+
+.resource-hero-editorial__media figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 15px 14px;
+  color: #fffdf8;
+  font-size: .63rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.resource-hero-editorial__media figcaption span {
+  opacity: .76;
+}
+
+.resource-hero-editorial__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(16px, 2vw, 28px) 0;
+}
+
+.resource-hero-editorial__copy h1 {
+  max-width: 8.5ch;
+  margin: 18px 0 24px;
+  color: var(--v51-ink, #18242c);
+  font-family: var(--v51-serif, Georgia, serif);
+  font-size: clamp(4rem, 6.6vw, 7rem);
+  font-weight: 500;
+  line-height: .86;
+  letter-spacing: -.06em;
+}
+
+.resource-hero-editorial__copy h1 em {
+  color: #a51c3a;
+  font-family: var(--v51-serif, Georgia, serif);
+  font-weight: 500;
+}
+
+.resource-hero-editorial__copy > p {
+  max-width: 35rem;
+  margin: 0;
+  color: var(--v51-ink-soft, #56636d);
+  font-size: clamp(1rem, 1.25vw, 1.16rem);
+  line-height: 1.75;
+}
+
+.resource-hero-editorial__status {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 5px 18px;
+  max-width: 31rem;
+  margin-top: 46px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(24, 36, 44, .22);
+}
+
+.resource-hero-editorial__status > span,
+.resource-hero-editorial__status > small {
+  color: var(--v51-muted, #71808a);
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.resource-hero-editorial__status > strong {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: var(--v51-ink, #18242c);
+  font-family: var(--v51-serif, Georgia, serif);
+  font-size: clamp(4rem, 6vw, 6.5rem);
+  font-weight: 500;
+  line-height: .8;
+  letter-spacing: -.06em;
+}
+
+.resource-hero-editorial__status > div {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(24, 36, 44, .13);
+  color: var(--v51-ink-2, #40505a);
+  font-size: .78rem;
+}
+
+.resource-hero-editorial__status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b87823;
+}
+
+.resource-hero-editorial__status i.is-live {
+  background: #39715d;
+}
+
+.resource-order-note {
+  width: min(100%, 760px);
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding-inline: 0;
+}
+
+/* ------------------------------------------------------------------------
+   INSTRUCTOR
+   Add a quiet institutional photographic spine so the page has a visual
+   center instead of a large empty middle column.
+   ------------------------------------------------------------------------ */
+.final-instructor-opening__grid {
+  grid-template-columns: minmax(0, 1.1fr) minmax(180px, .34fr) minmax(260px, .66fr);
+  gap: clamp(28px, 4.5vw, 72px);
+}
+
+.final-instructor-campus {
+  position: relative;
+  min-height: clamp(300px, 33vw, 430px);
+  margin: 0;
+  overflow: hidden;
+  background: #d8d1c5;
+  border: 1px solid rgba(22, 36, 45, .14);
+}
+
+.final-instructor-campus img {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.004);
+}
+
+.final-instructor-campus figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 11px;
+  color: #fffdf8;
+  background: linear-gradient(180deg, transparent, rgba(11, 26, 37, .48));
+  font-size: .56rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.final-instructor-campus figcaption span {
+  opacity: .72;
+}
+
+.final-instructor-opening__aside {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.final-instructor-access {
+  margin-top: auto;
+}
+
+.final-instructor-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 42px;
+  border-top: 1px solid rgba(255,255,255,.22);
+}
+
+.final-instructor-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 62px;
+  padding: 0 18px 0 0;
+  border-bottom: 1px solid rgba(255,255,255,.13);
+}
+
+.final-instructor-links a + a {
+  padding-left: 18px;
+  border-left: 1px solid rgba(255,255,255,.13);
+}
+
+/* ------------------------------------------------------------------------
+   FOOTER
+   Give the closing frame the same editorial confidence as the opening.
+   ------------------------------------------------------------------------ */
+.v51-footer__top {
+  padding-top: clamp(62px, 7vw, 94px);
+  padding-bottom: clamp(50px, 6vw, 78px);
+}
+
+.v51-footer__top h2 {
+  max-width: 9ch;
+  margin-top: 14px;
+  font-family: var(--v51-serif, Georgia, serif);
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: -.055em;
+}
+
+.v51-footer__grid {
+  padding-top: 34px;
+}
+
+.v51-footer__bottom {
+  padding-top: 18px;
+  padding-bottom: 24px;
+}
+
+/* ------------------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .resource-hero-editorial__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-hero-editorial__media {
+    min-height: min(640px, 70vw);
+  }
+
+  .final-instructor-opening__grid {
+    grid-template-columns: 1fr 220px 1fr;
+    gap: 24px;
+  }
+
+  .final-instructor-name h1 {
+    font-size: clamp(4.2rem, 10vw, 7rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .resource-hero-editorial {
+    padding-top: 24px;
+  }
+
+  .resource-hero-editorial__media {
+    min-height: 360px;
+  }
+
+  .resource-hero-editorial__copy h1 {
+    font-size: clamp(3.7rem, 17vw, 5.4rem);
+  }
+
+  .final-instructor-opening__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .final-instructor-campus {
+    min-height: 300px;
+    order: 2;
+  }
+
+  .final-instructor-opening__aside {
+    order: 3;
+  }
+
+  .final-instructor-name {
+    order: 1;
+  }
+
+  .final-instructor-links {
+    grid-template-columns: 1fr;
+  }
+
+  .final-instructor-links a + a {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
