@@ -28,6 +28,16 @@ export const metadata: Metadata = {
   authors: [{ name: 'Krishna V Gowda', url: 'https://github.com/Krishna-V-Gowda' }],
   creator: 'Krishna V Gowda',
   publisher: 'Vidyashilp University',
+  formatDetection: { telephone: false, address: false, email: false },
+  appleWebApp: { capable: true, title: 'DATA301 ML', statusBarStyle: 'default' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
   openGraph: {
     type: 'website',
     title: 'DATA301 · Machine Learning Studio',
@@ -45,8 +55,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f7f6f1' },
-    { media: '(prefers-color-scheme: dark)', color: '#07111f' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f2e8' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f2838' },
   ],
 };
 

@@ -10,6 +10,8 @@ The DATA301 course content, supplied presentations, course planning documents, i
 
 These institutional marks, photographs, and instructor-authored academic materials are **not granted for reuse by any software license that may accompany this repository**. Their presence in the course deployment does not transfer ownership or create a general redistribution permission.
 
+The About-page campus sequence uses optimized local copies of photographs published through Vidyashilp University's official web properties. Source URLs and intended roles are recorded in `public/campus/ABOUT_ASSET_SOURCES.md`; the local preparation script avoids runtime hotlinking while preserving the institutional attribution boundary.
+
 ## Private binaries
 
 The following files are intentionally excluded from this public source repository and are handled only through authorized private release storage:

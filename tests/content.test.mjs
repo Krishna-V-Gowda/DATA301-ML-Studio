@@ -105,6 +105,13 @@ test('packaged public fallback materials and all visual assets exist', () => {
     'campus/vu-campus-courtyard.webp',
     'campus/vu-campus-detail.webp',
     'campus/vu-campus-atmosphere.webp',
+    'campus/about-lab.jpg',
+    'campus/about-studio.jpg',
+    'campus/about-reception.jpg',
+    'campus/about-students.jpg',
+    'icon-192.png',
+    'icon-512.png',
+    'icon-maskable-512.png',
     'thumbnails/module2-cover.webp',
   ]) {
     assert.ok(existsSync(resolve(publicRoot, asset)), asset);

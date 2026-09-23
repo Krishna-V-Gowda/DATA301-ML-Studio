@@ -55,6 +55,18 @@ const required = [
   'public/campus/vu-campus-courtyard.webp',
   'public/campus/vu-campus-detail.webp',
   'public/campus/vu-campus-atmosphere.webp',
+  'public/campus/about-lab.jpg',
+  'public/campus/about-studio.jpg',
+  'public/campus/about-reception.jpg',
+  'public/campus/about-students.jpg',
+  'public/campus/ABOUT_ASSET_SOURCES.md',
+  'public/icon-192.png',
+  'public/icon-512.png',
+  'public/icon-maskable-512.png',
+  'app/favicon.ico',
+  'app/icon.png',
+  'app/apple-icon.png',
+  'scripts/fetch-about-images.sh',
   'public/thumbnails/module2-cover.webp',
   'NOTICE.md',
   'CHANGELOG.md',
@@ -170,6 +182,8 @@ const sourceChecks = [
   ['scripts/seed-materials.mjs', /Module-2\.pdf[\s\S]*visibility: 'public'/, 'Module 2 is configured for private-storage/public-signed delivery'],
   ['scripts/seed-materials.mjs', /materials[\s\S]*eq\('course_id', course\.id\)[\s\S]*eq\('kind', asset\.kind\)[\s\S]*eq\('version', 1\)/, 'Material seeding reconciles against logical identity'],
   ['scripts/seed-materials.mjs', /Detailed Course Plan[\s\S]*visibility: 'staff'/, 'Detailed Course Plan is configured staff-only'],
+  ['app/(site)/about/page.tsx', /vu-campus-wide\.webp[\s\S]*about-life\.jpg[\s\S]*about-reception-final\.jpg/, 'About page uses the final restrained campus image story'],
+  ['app/manifest.ts', /icon-192\.png[\s\S]*icon-512\.png[\s\S]*icon-maskable-512\.png/, 'Installable browser and maskable icons are declared'],
 ];
 for (const [path, expression, label] of sourceChecks) {
   const text = await readFile(resolve(root, path), 'utf8');

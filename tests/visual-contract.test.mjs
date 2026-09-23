@@ -4,6 +4,9 @@ import fs from 'node:fs';
 
 const css = fs.readFileSync(new URL('../app/v6.css', import.meta.url), 'utf8');
 const learn = fs.readFileSync(new URL('../app/(site)/learn/page.tsx', import.meta.url), 'utf8');
+const about = fs.readFileSync(new URL('../app/(site)/about/page.tsx', import.meta.url), 'utf8');
+const manifest = fs.readFileSync(new URL('../app/manifest.ts', import.meta.url), 'utf8');
+const nextConfig = fs.readFileSync(new URL('../next.config.ts', import.meta.url), 'utf8');
 
 const darkSurfaces = [
   '.d6-home-band',
@@ -13,6 +16,7 @@ const darkSurfaces = [
   '.d6-course-instructor',
   '.d6-project-expectations',
   '.d6-instructor-research',
+  '.d6-about-philosophy',
   '.d6-footer',
 ];
 
@@ -32,4 +36,28 @@ test('V6 dark surfaces explicitly own heading contrast', () => {
 test('learning atlas labels practice sessions, not hours', () => {
   assert.match(learn, /<strong>30<\/strong><span>practice sessions<\/span>/);
   assert.doesNotMatch(learn, /<strong>30<\/strong><span>practice hours<\/span>/);
+});
+
+
+test('About page uses restrained imagery and responsive editorial art direction', () => {
+  assert.match(about, /\/campus\/vu-campus-wide\.webp/);
+  assert.match(about, /\/campus\/about-life\.jpg/);
+  assert.match(about, /\/campus\/about-reception-final\.jpg/);
+  assert.doesNotMatch(about, /about-studio\.jpg|about-lab\.jpg|about-students\.jpg|vu-campus-atmosphere\.webp/);
+  assert.doesNotMatch(about, /d6-about-scenes|d6-about-collage/);
+  assert.match(about, /Beyond the screen/);
+  assert.match(about, /The work has a place\./);
+  assert.equal((about.match(/<Image/g) || []).length, 3);
+  assert.match(css, /\.d6-about-godshot__gallery/);
+  assert.match(css, /@media \(max-width:\s*900px\)[\s\S]*\.d6-about-godshot__gallery/);
+  assert.match(css, /@media \(max-width:\s*560px\)[\s\S]*\.d6-about-godshot__hero-media/);
+});
+
+test('installable brand icons are declared for browser, Apple, and maskable contexts', () => {
+  assert.match(manifest, /icon-192\.png/);
+  assert.match(manifest, /icon-512\.png/);
+  assert.match(manifest, /icon-maskable-512\.png/);
+  assert.match(manifest, /purpose:\s*'maskable'/);
+  assert.doesNotMatch(manifest, /icon\.svg/);
+  assert.match(nextConfig, /qualities:\s*\[75, 85, 90\]/);
 });

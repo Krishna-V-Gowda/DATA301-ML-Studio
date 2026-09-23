@@ -6,12 +6,16 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'DATA301 ML',
     description: 'Visual lessons, interactive labs, projects, and course resources for DATA301.',
     start_url: '/',
+    scope: '/',
     display: 'standalone',
-    background_color: '#f5f4ef',
-    theme_color: '#07182e',
+    orientation: 'any',
+    background_color: '#f6f2e8',
+    theme_color: '#0f2838',
+    categories: ['education', 'productivity'],
     icons: [
-      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
-      { src: '/icon-maskable.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }

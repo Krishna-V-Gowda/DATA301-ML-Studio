@@ -21,7 +21,8 @@
     "prepare:go-live": "bash scripts/prepare-go-live.sh",
     "smoke:live": "node --env-file=.env.local --no-warnings --experimental-strip-types scripts/smoke-live.mjs",
     "smoke:cosmic": "node --env-file=.env.local --no-warnings --experimental-strip-types scripts/smoke-live.mjs",
-    "migrate:supabase": "bash scripts/apply-supabase-migrations.sh"
+    "migrate:supabase": "bash scripts/apply-supabase-migrations.sh",
+    "assets:about": "bash scripts/fetch-about-images.sh"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
