@@ -824,7 +824,6 @@ img { max-width: 100%; }
     line-height: 0.98 !important;
   }
 }
-
 /* V6.6 About Godshot — isolated final art direction.
    Scope is restricted to .d6-about-godshot and shared About descendants. */
 
@@ -1271,5 +1270,789 @@ img { max-width: 100%; }
 
   .d6-about-godshot__gallery figure:hover .d6-about-godshot__image img {
     transform: none;
+  }
+}
+
+/* V6.7 mobile composition system.
+   Desktop art direction remains unchanged; these rules own tablet and phone layout. */
+@media (max-width: 900px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .d6-page {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .d6-learn-map__intro,
+  .d6-course-instructor__grid,
+  .d6-instructor-hero__grid,
+  .d6-instructor-research__intro {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .d6-learn-map__intro {
+    gap: 30px;
+  }
+
+  .d6-course-instructor__grid {
+    gap: 28px;
+  }
+
+  .d6-course-instructor__links,
+  .d6-instructor-links {
+    min-width: 0;
+    width: 100%;
+    grid-column: auto;
+  }
+
+  .d6-instructor-hero__grid {
+    gap: 30px;
+    padding: 44px 0 50px;
+  }
+
+  .d6-instructor-profile {
+    width: min(calc(100% - 44px), var(--d6-shell));
+    margin-inline: auto;
+  }
+
+  .d6-instructor-profile__main,
+  .d6-instructor-profile__copy,
+  .d6-learn-map__intro > *,
+  .d6-course-instructor__grid > *,
+  .d6-instructor-hero__grid > * {
+    min-width: 0;
+  }
+
+  .d6-lab-grid-full {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --d6-mobile-gutter: 15px;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--d6-header) + 12px);
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .d6-shell {
+    width: min(calc(100% - (var(--d6-mobile-gutter) * 2)), var(--d6-shell));
+  }
+
+  .d6-page h1,
+  .d6-page h2,
+  .d6-page h3 {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+  }
+
+  .d6-eyebrow {
+    gap: 9px;
+    font-size: 10px;
+    line-height: 1.35;
+    letter-spacing: .145em;
+  }
+
+  .d6-eyebrow::before {
+    flex: 0 0 24px;
+    width: 24px;
+  }
+
+  .d6-course-hero h1,
+  .d6-learn-map h1,
+  .d6-labs-hero h1,
+  .d6-project-hero h1,
+  .d6-resource-hero h1,
+  .d6-page__hero h1 {
+    max-width: 100%;
+    font-size: clamp(3.15rem, 14.2vw, 4.75rem);
+    line-height: .91;
+    letter-spacing: -.057em;
+  }
+
+  .d6-course-hero h1 > span,
+  .d6-course-hero h1 > em,
+  .d6-learn-map h1 > span,
+  .d6-learn-map h1 > em,
+  .d6-labs-hero h1 > span,
+  .d6-labs-hero h1 > em,
+  .d6-project-hero h1 > span,
+  .d6-project-hero h1 > em,
+  .d6-resource-hero h1 > span,
+  .d6-resource-hero h1 > em {
+    display: block;
+  }
+
+  .d6-course-hero h1 > em,
+  .d6-learn-map h1 > em,
+  .d6-labs-hero h1 > em,
+  .d6-project-hero h1 > em,
+  .d6-resource-hero h1 > em {
+    margin-top: .1em;
+    line-height: .95;
+  }
+
+  .d6-button {
+    min-height: 48px;
+    padding-inline: 17px;
+  }
+
+  /* Home */
+  .d6-home-hero {
+    padding: 42px 0 38px;
+  }
+
+  .d6-home-hero__grid {
+    gap: 38px;
+  }
+
+  .d6-home-hero__copy h1 {
+    max-width: 100%;
+    font-size: clamp(3.3rem, 14.4vw, 4.85rem);
+    line-height: .9;
+    letter-spacing: -.06em;
+  }
+
+  .d6-home-hero__lede {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .d6-home-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+    margin-top: 26px;
+  }
+
+  .d6-home-actions .d6-button {
+    width: 100%;
+  }
+
+  .d6-home-proof {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 32px;
+  }
+
+  .d6-home-proof div {
+    min-width: 0;
+    padding: 14px 8px 14px 0;
+  }
+
+  .d6-home-proof div + div {
+    padding-left: 8px;
+  }
+
+  .d6-home-proof strong {
+    font-size: 29px;
+  }
+
+  .d6-home-proof span {
+    font-size: 8px;
+    line-height: 1.35;
+    letter-spacing: .08em;
+  }
+
+  .d6-model-card {
+    box-shadow: 7px 7px 0 rgba(31,92,182,.1);
+  }
+
+  .d6-model-card__head {
+    padding: 12px 13px;
+    font-size: 8px;
+    letter-spacing: .1em;
+  }
+
+  .d6-model-card__plot {
+    padding: 9px;
+  }
+
+  .d6-model-card__foot {
+    padding: 14px;
+  }
+
+  .d6-home-band h2,
+  .d6-section-head h2,
+  .d6-home-close h2,
+  .d6-campus-slice__copy h2,
+  .d6-materials .d6-section-head h2 {
+    font-size: clamp(2.85rem, 12.5vw, 4.2rem);
+    line-height: .93;
+    letter-spacing: -.052em;
+  }
+
+  .d6-module,
+  .d6-lab-card {
+    min-height: 0;
+  }
+
+  .d6-module {
+    padding: 16px 16px 20px;
+  }
+
+  .d6-module h3 {
+    font-size: 29px;
+  }
+
+  .d6-lab-feature {
+    padding: 62px 0 70px;
+  }
+
+  .d6-lab-feature .d6-section-head {
+    gap: 20px;
+  }
+
+  .d6-lab-card {
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+
+  .d6-lab-card__glyph {
+    height: 118px;
+    margin: 12px 0 16px;
+  }
+
+  .d6-lab-card h3 {
+    font-size: 31px;
+  }
+
+  .d6-campus-slice,
+  .d6-project-feature {
+    min-height: 0;
+  }
+
+  .d6-campus-slice__copy,
+  .d6-project-feature__copy {
+    padding: 42px var(--d6-mobile-gutter) 50px;
+  }
+
+  .d6-material {
+    grid-template-columns: 34px minmax(0, 1fr) 20px;
+    gap: 11px;
+    align-items: start;
+    padding: 18px 0;
+  }
+
+  .d6-material__meta {
+    display: none;
+  }
+
+  .d6-material h3 {
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  .d6-material p {
+    font-size: 12px;
+  }
+
+  /* Course */
+  .d6-course-hero {
+    padding: 42px 0 0;
+  }
+
+  .d6-course-hero__grid {
+    gap: 28px;
+  }
+
+  .d6-course-hero__body p,
+  .d6-project-hero p,
+  .d6-resource-hero p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .d6-course-facts {
+    margin-top: 34px;
+  }
+
+  .d6-course-fact {
+    min-width: 0;
+    padding-block: 14px 16px;
+  }
+
+  .d6-course-fact strong {
+    font-size: 19px;
+  }
+
+  .d6-course-section {
+    padding: 64px 0;
+  }
+
+  .d6-course-anatomy h2,
+  .d6-course-outcomes h2,
+  .d6-course-modules h2,
+  .d6-labs-close h2,
+  .d6-learn-bridge h2,
+  .d6-project-feature__copy h2,
+  .d6-project-expectations h2,
+  .d6-resource-reference h2 {
+    font-size: clamp(2.8rem, 12.5vw, 4.15rem);
+    line-height: .94;
+    letter-spacing: -.052em;
+  }
+
+  .d6-course-instructor {
+    padding: 58px 0 66px;
+  }
+
+  .d6-course-instructor__grid {
+    gap: 24px;
+  }
+
+  .d6-course-instructor__number {
+    display: flex;
+    gap: 8px;
+    line-height: 1.4;
+  }
+
+  .d6-course-instructor h2 {
+    max-width: 8ch;
+    font-size: clamp(3.2rem, 13vw, 4.65rem);
+    line-height: .91;
+    letter-spacing: -.055em;
+  }
+
+  .d6-course-instructor p {
+    max-width: 32rem;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .d6-course-instructor__links {
+    margin-top: 4px;
+    border-top: 1px solid rgba(255,255,255,.2);
+  }
+
+  .d6-course-instructor__links a {
+    min-height: 52px;
+    align-items: center;
+  }
+
+  /* Learning atlas */
+  .d6-learn-map {
+    padding: 42px 0 32px;
+  }
+
+  .d6-learn-map__intro {
+    gap: 26px;
+  }
+
+  .d6-learn-map h1 {
+    margin-top: 16px;
+  }
+
+  .d6-learn-map__intro > p {
+    position: static;
+    max-width: 34rem;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.66;
+  }
+
+  .d6-learn-summary {
+    margin-top: 34px;
+  }
+
+  .d6-learn-summary div {
+    min-width: 0;
+    padding: 14px 12px;
+  }
+
+  .d6-learn-summary strong {
+    font-size: 28px;
+  }
+
+  .d6-learn-summary span {
+    font-size: 8px;
+    line-height: 1.35;
+    letter-spacing: .09em;
+  }
+
+  .d6-learning-atlas {
+    padding: 32px 0 72px;
+  }
+
+  .d6-learning-module {
+    gap: 19px;
+    padding: 28px 0 34px;
+  }
+
+  .d6-learning-module__head h2 {
+    font-size: 35px;
+    line-height: .95;
+  }
+
+  .d6-learning-module__head p {
+    font-size: 13px;
+  }
+
+  .d6-session {
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .d6-learn-bridge {
+    padding: 58px 0 66px;
+  }
+
+  /* Laboratories */
+  .d6-labs-hero {
+    padding: 52px 0 54px;
+  }
+
+  .d6-labs-hero__grid {
+    gap: 38px;
+  }
+
+  .d6-labs-hero__lede {
+    margin-top: 23px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .d6-labs-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .d6-labs-hero__stats span {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    padding: 9px;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .d6-labs-hero__stats span:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .d6-lab-instrument {
+    box-shadow: 7px 7px 0 rgba(230,161,88,.1);
+  }
+
+  .d6-lab-instrument__plot {
+    padding: 10px;
+  }
+
+  .d6-lab-instrument__note {
+    padding: 14px;
+  }
+
+  .d6-lab-instrument__note strong {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .d6-lab-directory {
+    padding-top: 58px;
+  }
+
+  .d6-lab-family {
+    padding-bottom: 58px;
+  }
+
+  .d6-lab-family__head h2 {
+    font-size: 40px;
+    line-height: .95;
+  }
+
+  .d6-lab-grid-full {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .d6-lab-item {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .d6-lab-item__visual {
+    height: 82px;
+    margin: 19px 0 16px;
+  }
+
+  .d6-lab-item h3 {
+    font-size: 28px;
+  }
+
+  .d6-lab-item__tags {
+    margin-top: 18px;
+  }
+
+  .d6-labs-close {
+    padding: 54px 0 74px;
+  }
+
+  /* Projects */
+  .d6-project-hero {
+    padding: 42px 0 48px;
+  }
+
+  .d6-project-hero__grid {
+    gap: 30px;
+  }
+
+  .d6-project-method {
+    margin-top: 26px;
+  }
+
+  .d6-project-feature__image {
+    min-height: 310px;
+  }
+
+  .d6-projects-list {
+    padding: 64px 0;
+  }
+
+  .d6-projects-list .d6-serif {
+    font-size: clamp(2.9rem, 12.8vw, 4.25rem) !important;
+    line-height: .94 !important;
+  }
+
+  .d6-project-row {
+    padding: 20px 0;
+  }
+
+  .d6-project-row h3 {
+    font-size: 27px;
+  }
+
+  .d6-project-expectations {
+    padding: 62px 0 76px;
+  }
+
+  .d6-project-expectations__grid {
+    gap: 38px;
+  }
+
+  /* Resources */
+  .d6-resource-hero {
+    padding: 42px 0 40px;
+  }
+
+  .d6-resource-hero__grid {
+    gap: 30px;
+  }
+
+  .d6-resource-count {
+    margin-top: 26px;
+  }
+
+  .d6-resource-count strong {
+    font-size: 58px;
+  }
+
+  .d6-resource-zone {
+    padding: 36px 0 76px;
+  }
+
+  .d6-resource-toolbar {
+    padding: 16px;
+  }
+
+  .d6-resource-row {
+    padding: 18px 0;
+  }
+
+  .d6-resource-row h3 {
+    line-height: 1.35;
+  }
+
+  .d6-resource-reference {
+    margin-top: 58px;
+  }
+
+  .d6-resource-reader__hero {
+    padding: 38px 0 34px;
+  }
+
+  .d6-resource-reader h1 {
+    max-width: 100%;
+    font-size: clamp(3rem, 13.5vw, 4.5rem);
+    line-height: .93;
+  }
+
+  .d6-resource-reader__body {
+    padding: 48px 0 80px;
+  }
+
+  .d6-resource-reader__content {
+    font-size: 15px;
+    line-height: 1.72;
+  }
+
+  /* Instructor */
+  .d6-instructor-hero {
+    padding-top: 34px;
+  }
+
+  .d6-instructor-hero__top {
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .d6-instructor-hero__grid {
+    gap: 26px;
+    padding: 36px 0 44px;
+  }
+
+  .d6-instructor-hero h1 {
+    max-width: 100%;
+    font-size: clamp(4rem, 17.2vw, 5.65rem);
+    line-height: .8;
+    letter-spacing: -.07em;
+  }
+
+  .d6-instructor-hero h1 small {
+    margin-bottom: 8px;
+  }
+
+  .d6-instructor-identity {
+    padding-bottom: 0;
+  }
+
+  .d6-instructor-identity strong {
+    font-size: 27px;
+  }
+
+  .d6-instructor-identity p {
+    font-size: 15px;
+  }
+
+  .d6-instructor-links {
+    margin-top: 4px;
+  }
+
+  .d6-instructor-links a {
+    min-height: 52px;
+    align-items: center;
+  }
+
+  .d6-instructor-profile {
+    width: min(calc(100% - (var(--d6-mobile-gutter) * 2)), var(--d6-shell));
+    gap: 24px !important;
+    padding: 62px 0 70px !important;
+  }
+
+  .d6-instructor-profile__main > h2 {
+    max-width: 100% !important;
+    font-size: clamp(3rem, 13vw, 4.15rem);
+    line-height: .98 !important;
+    letter-spacing: -.052em;
+  }
+
+  .d6-instructor-profile__copy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    margin-top: 26px !important;
+  }
+
+  .d6-instructor-profile__copy p {
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .d6-instructor-research {
+    padding: 66px 0 78px;
+  }
+
+  .d6-instructor-research__intro {
+    gap: 28px;
+  }
+
+  .d6-instructor-research h2 {
+    max-width: 9ch;
+    font-size: clamp(3.2rem, 14vw, 4.7rem);
+    line-height: .91;
+    letter-spacing: -.055em;
+  }
+
+  .d6-instructor-research__intro p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .d6-interest-list {
+    margin-top: 38px;
+  }
+
+  .d6-interest {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .d6-interest strong {
+    font-size: clamp(1.9rem, 8.8vw, 2.75rem);
+    line-height: 1;
+  }
+
+  .d6-instructor-research__links {
+    margin-top: 34px;
+  }
+
+  .d6-instructor-research__links a {
+    min-height: 52px;
+    align-items: center;
+  }
+
+  /* Footer and safe-area breathing room */
+  .d6-footer__signal {
+    padding: 58px 0;
+  }
+
+  .d6-footer__signal h2 {
+    font-size: clamp(3rem, 13vw, 4.4rem);
+    line-height: .91;
+  }
+
+  .d6-footer__signal .d6-button {
+    width: 100%;
+  }
+
+  .d6-footer__main {
+    padding: 42px 0 max(28px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 560px) {
+  .d6-footer__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .d6-footer__brand,
+  .d6-footer nav {
+    grid-column: auto;
+  }
+
+  .d6-footer__bottom {
+    gap: 10px;
+  }
+
+  .d6-home-proof span,
+  .d6-learn-summary span {
+    letter-spacing: .065em;
   }
 }

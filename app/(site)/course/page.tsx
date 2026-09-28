@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: 'Course', description: 'DATA301 Machi
 export default function CoursePage() {
   return <main id="main-content" className="d6-page d6-course">
     <section className="d6-course-hero"><div className="d6-shell">
-      <div className="d6-course-hero__grid"><div><p className="d6-eyebrow">The course · DATA301</p><h1>Understand the model.<em>Defend the decision.</em></h1></div><div className="d6-course-hero__body"><p>{course.description}</p><div className="d6-home-actions"><Link className="d6-button d6-button--dark" href="/learn">Open the learning atlas <Icon name="arrow" size={15}/></Link><Link className="d6-button d6-button--light" href="/labs">Enter the laboratories <Icon name="arrow" size={15}/></Link></div></div></div>
+      <div className="d6-course-hero__grid"><div><p className="d6-eyebrow">The course · DATA301</p><h1><span>Understand the model.</span><em>Defend the decision.</em></h1></div><div className="d6-course-hero__body"><p>{course.description}</p><div className="d6-home-actions"><Link className="d6-button d6-button--dark" href="/learn">Open the learning atlas <Icon name="arrow" size={15}/></Link><Link className="d6-button d6-button--light" href="/labs">Enter the laboratories <Icon name="arrow" size={15}/></Link></div></div></div>
       <div className="d6-course-facts">{[['Course',course.code],['Semester',course.semester],['Credits',String(course.credits)],['Duration',`${course.durationWeeks} weeks`],['Lecture',`${course.lectureHours} hours`],['Practice',`${course.practiceHours} hours`]].map(([label,value])=><div className="d6-course-fact" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
     </div></section>
 

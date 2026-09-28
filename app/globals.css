@@ -9446,3 +9446,248 @@ img {
     font-size: clamp(4rem, 18vw, 5.8rem);
   }
 }
+
+/* V6.7 mobile auth, administration, module, topic, and laboratory composition. */
+.login-visual h1 {
+  max-width: 9ch;
+  margin: 14px 0 0;
+  color: #fff;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(3.4rem, 5vw, 5.4rem);
+  font-weight: 500;
+  line-height: .94;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.login-capabilities div {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.login-capabilities div > svg {
+  margin-top: 2px;
+}
+
+.login-capabilities div > span {
+  display: block;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.login-capabilities strong {
+  display: block;
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: .82rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 900px) {
+  .page-hero__grid,
+  .module-hero__grid,
+  .topic-hero__grid,
+  .lab-explanation {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .module-orbit-card {
+    width: min(100%, 620px);
+  }
+
+  .login-visual h1 {
+    font-size: clamp(3.2rem, 8.5vw, 4.8rem);
+  }
+}
+
+@media (max-width: 680px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .page-hero,
+  .module-hero,
+  .topic-hero,
+  .lab-page-hero {
+    padding-block: 54px;
+  }
+
+  .page-hero h1,
+  .module-hero h1,
+  .topic-hero h1,
+  .lab-page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: .96;
+    letter-spacing: -.045em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .page-hero p,
+  .module-hero p,
+  .lab-page-hero p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .module-hero__meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .module-hero__meta span {
+    line-height: 1.4;
+  }
+
+  .module-orbit-card {
+    min-height: 250px;
+    padding: 26px;
+    border-radius: 22px;
+  }
+
+  .module-orbit-card p {
+    font-size: 1.3rem;
+  }
+
+  .module-main {
+    gap: 62px;
+  }
+
+  .content-heading h2 {
+    font-size: clamp(2rem, 9vw, 2.9rem);
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .lesson-card {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 13px;
+    padding: 17px;
+  }
+
+  .lesson-card > svg {
+    display: none;
+  }
+
+  .lab-page__content {
+    padding-block: 44px;
+  }
+
+  .lab-explanation {
+    gap: 32px;
+    padding-bottom: 82px;
+  }
+
+  .lab-explanation h2 {
+    font-size: clamp(2.25rem, 10vw, 3.2rem);
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .explanation-grid article {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .login-page {
+    min-height: 100svh;
+  }
+
+  .login-visual {
+    min-height: 0;
+    place-items: initial;
+    align-content: start;
+    padding: 46px 24px 56px;
+  }
+
+  .login-logo {
+    justify-self: center;
+    margin-bottom: 48px;
+  }
+
+  .login-logo img {
+    width: 160px;
+  }
+
+  .login-visual__content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .login-visual h1 {
+    max-width: 8.5ch;
+    font-size: clamp(3rem, 13vw, 4.35rem);
+    line-height: .94;
+    letter-spacing: -.05em;
+  }
+
+  .login-visual p {
+    margin-top: 24px;
+    font-size: 1rem;
+    line-height: 1.64;
+  }
+
+  .login-capabilities {
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .login-capabilities div {
+    min-height: 0;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .login-panel {
+    padding: 46px 24px max(48px, env(safe-area-inset-bottom));
+  }
+
+  .login-panel__inner {
+    width: 100%;
+  }
+
+  .login-panel h2 {
+    font-size: clamp(2.4rem, 10vw, 3.35rem);
+    line-height: 1;
+  }
+
+  .admin-main {
+    padding: 22px 14px max(42px, env(safe-area-inset-bottom));
+  }
+
+  .admin-stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-page-heading h1 {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+    line-height: 1;
+  }
+
+  .admin-card,
+  .admin-settings-grid .admin-card {
+    padding: 18px;
+  }
+
+  .admin-card__heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
