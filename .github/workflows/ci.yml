@@ -38,6 +38,9 @@ jobs:
             npm install --no-audit --no-fund
           fi
 
+      - name: Audit shipped dependencies
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Verify source integrity
         run: npm run verify:source
 
