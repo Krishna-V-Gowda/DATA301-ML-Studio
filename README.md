@@ -67,7 +67,7 @@ See [`docs/MODULE_2_CONTENT_MAP.md`](docs/MODULE_2_CONTENT_MAP.md) for the evide
 - **Learning visualizations:** custom SVG/DOM interactions and deterministic TypeScript algorithms
 - **Mathematics:** KaTeX
 - **Backend:** Supabase Auth, PostgreSQL, Row Level Security, private Storage
-- **Validation:** Node test runner, TypeScript, source-integrity checks, production smoke tests
+- **Validation:** Node test runner (60 tests, including 7 metamorphic properties), TypeScript, source-integrity checks, production smoke tests
 - **Deployment:** Vercel
 
 ## Architecture
@@ -133,7 +133,7 @@ npm run verify:release
 The gate runs:
 
 1. source/package integrity and secret scanning;
-2. algorithm, content, privacy, and security tests;
+2. algorithm, metamorphic, content, privacy, and security tests;
 3. TypeScript checking;
 4. an optimized Next.js production build.
 
